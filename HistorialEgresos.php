@@ -34,7 +34,7 @@
   <!--Inicio contenedor Cabecera-->
   <div class="container">
     <br>
-    <?php include "menu_alumno.php"; ?>
+    <?php include "MenuSuperior.php"; ?>
 
 
 
@@ -49,7 +49,7 @@
     <div class="row">
       <!--Inicio de menu izquierdo-->
       <div class="col-sm-3">
-        <?php include 'menu_izquierdo_alumno.php' ?>
+        <?php include 'MenuLateral.php' ?>
       </div>
 
       <!--Fin inicio menu izquierdo-->
@@ -65,7 +65,7 @@
           <div class="col-sm-12">
             <h2>Historial Egresos</h2>
             <br><br>
-            <a button type="button" class="btn btn-success" href="BaseEgreso.php">
+            <a button type="button" class="btn btn-success" href="AgregarEgreso.php">
               Agregar nuevo Egreso
               <span class="glyphicon glyphicon-plus"></span>
               </button></a>

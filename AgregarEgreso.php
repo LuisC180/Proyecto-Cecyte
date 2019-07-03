@@ -23,12 +23,12 @@
 <body>
   <div class="container">
     <br>
-    <?php include "menu_alumno.php"; ?>
+    <?php include "MenuSuperior.php"; ?>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-        <?php include 'menu_izquierdo_alumno.php' ?>
+        <?php include 'MenuLateral.php' ?>
       </div>
       <div class="col-sm-9">
 
