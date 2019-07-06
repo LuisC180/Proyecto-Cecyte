@@ -1,3 +1,22 @@
+<?php
+if (isset($_POST['nombre'])){
+
+	require('conexion.php');
+
+	$sql = "INSERT INTO ingresos 
+	(apellido_paterno, apellido_materno, nombre, fecha_ingreso, grado, grupo, semestre, carrera, concepto, costo)
+	VALUES ('$_POST[apellido_paterno]', '$_POST[apellido_materno]', '$_POST[nombre]', '$_POST[fecha_ingreso]', 
+	'$_POST[grado]', '$_POST[grupo]', '$_POST[semestre]', '$_POST[carrera]', '$_POST[concepto]', '$_POST[costo]')";
+
+	if ($conexion->query($sql) === TRUE){
+		echo "<h1>Operacion Exitosa!<h1>";
+		echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+	} else {
+		echo "Error: ".$sql."<br>".$conexion->error;
+	}
+
+}else{
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,19 +59,19 @@
 				</center>
 				<div class="card border-success">
 					<div class="card-body">
-						<form action="./procesos/guardar_ingresos.php" method="POST">
+						<form action="./AgregarIngreso.php" method="POST">
 							<div class="row">
 								<div class="col-md-4">
 									<STRONG>Apellido Paterno: </STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Paterno" name="txtapellidoP">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Paterno" name="apellido_paterno">
 								</div>
 								<div class="col-md-4">
 									<STRONG>Apellido Materno: </STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Materno" name="txtapellidoM">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Materno" name="apellido_materno">
 								</div>
 								<div class="col-md-4">
 									<STRONG>Nombre(s):</STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa Nombre" name="txtnombre">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa Nombre" name="nombre">
 								</div>
 							</div>
 							<br>
@@ -60,15 +79,15 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<STRONG>Fecha:</STRONG><br><br>
-									<input class="form-control" type="date" value="" name="datefecha">
+									<input class="form-control" type="date" value="" name="fecha_ingreso">
 								</div>
 								<div class="col-sm-4">
 									<STRONG>Grado:</STRONG><br><br>
-									<input class="form-control" type="grado" class="form-control" placeholder="Grado" name="txtgrado">
+									<input class="form-control" type="grado" class="form-control" placeholder="Grado" name="grado">
 								</div>
 								<div class="col-sm-4">
 									<STRONG>Grupo:</STRONG><br><br>
-									<input class="form-control" type="grupo" placeholder="Grupo" name="txtgrupo">
+									<input class="form-control" type="grupo" placeholder="Grupo" name="grupo">
 								</div>
 							</div>
 							<br>
@@ -76,7 +95,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<STRONG>semestre:</STRONG>
-									<select class="form-control" name="cmbsemestre">
+									<select class="form-control" name="semestre">
 										<option></option>
 										<option>Febrero-Julio</option>
 										<option>Agosto-Diciembre</option>
@@ -84,7 +103,7 @@
 								</div>
 								<div class="col-md-6">
 									<STRONG>Carrera:</STRONG>
-									<select class="form-control" name="cmbcarrera">
+									<select class="form-control" name="carrera">
 										<option></option>
 										<option>Soporte y Matenimiento al Equipo de Computo</option>
 										<option>Enfermeria General</option>
@@ -98,7 +117,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<STRONG>Concepto:</STRONG>
-									<select class="form-control" name="cmbconcepto">
+									<select class="form-control" name="concepto">
 										<option></option>
 										<option>Certificado $100</option>
 										<option>Reposición o Duplicado de Certificados $250 </option>
@@ -117,7 +136,7 @@
 								</div>
 								<div class="col-md-6">
 									<STRONG>Valor $:</STRONG>
-									<input class="form-control" type="precio" name="txtprecio"><br>
+									<input class="form-control" type="precio" name="costo"><br>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -127,26 +146,10 @@
 					</div>
 				</div>
 			</div>
-
-			<?php
-			if (@$_POST['btnguardar']) {
-				mysql_query("INSERT INTO alumno(apellido,nombre,fecha,grado,grupo,semestre,carrera,concepto,precio) VALUES('$_POST[txtapellidoP]',$_POST[txtapellidoM]', '$_POST[txtnombre]','$_POST[datefecha]','$_POST[txtgrado]','$_POST[txtgrupo]','$_POST[cmbsemestre]','$_POST[cmbcarrera]','$_POST[cmbconcepto]','$_POST[txtprecio]')");
-			}
-			?>
 			</form>
-
 		</div>
-		<!--Fin Contenido central-->
-
-	</div>
-	<!--Fin Contenedor medio-->
-
-	<!--Inicio de pie de pagina-->
-	<div class="container">
-		<!-- <?php
-				?>-->
 	</div>
 </body>
-
-
 </html>
+
+<?php } ?>
