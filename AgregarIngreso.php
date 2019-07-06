@@ -117,26 +117,24 @@ if (isset($_POST['nombre'])){
 							<div class="row">
 								<div class="col-md-6">
 									<STRONG>Concepto:</STRONG>
-									<select class="form-control" name="concepto">
-										<option></option>
-										<option>Certificado $100</option>
-										<option>Reposición o Duplicado de Certificados $250 </option>
-										<option>Constancia de estudios $25</option>
-										<option>Expedición de títulos de técnico CECyTEZ $250</option>
-										<option>Reposición de credencial $100</option>
-										<option> Evaluación de extraordinario $100</option>
-										<option> Curso intersemestral $150</option>
-										<option> Recursamiento de asignatura $300</option>
-										<option> Cuotas voluntarias $600</option>
-										<option> Credencial $30</option>
-										<option> Cuotas Voluntarias con 50% de condonación $300</option>
-										<option> Cuotas Voluntarias con 100% de condonación $0</option>
-										<option> Cooperación para material de exámenes $70</option>
+									<select id="concepto" class="form-control" name="concepto">
+<?php
+require('conexion.php');
+
+$sql = "SELECT * FROM ingresos_conceptos";
+$result = $conexion->query($sql);
+
+if($result->num_rows > 0){
+	while($row = $result->fetch_assoc()){
+	echo "<option value='$row[id]'> $row[concepto] </option>";
+	}
+}
+?>
 									</select name=concepto>
 								</div>
 								<div class="col-md-6">
 									<STRONG>Valor $:</STRONG>
-									<input class="form-control" type="precio" name="costo"><br>
+									<input id="costo" class="form-control" name="costo" value="0"><br>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -151,5 +149,25 @@ if (isset($_POST['nombre'])){
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		getConceptosIngresos();
+		$('#concepto').change(function(){
+			getConceptosIngresos();
+		})
+	})
+</script>
+<script type="text/javascript">
+	function getConceptosIngresos(){
+		$.ajax({
+			type:"POST",
+			url:"./ajax/conceptos_ingreso.php",
+			data:"id_concepto="+$('#concepto').val(),
+			success:function(r){
+				document.getElementById('costo').value = r;
+			}
+		})
+	}
+</script>
 
 <?php } ?>

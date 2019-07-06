@@ -1,7 +1,7 @@
 <?php
 require('conexion.php');
 
-$sql = "SELECT * FROM ingresos";
+$sql = "SELECT * FROM ingresos JOIN ingresos_conceptos ON ingresos.concepto = ingresos_conceptos.id";
 $result = $conexion->query($sql);
 ?>
 <!doctype html>
@@ -42,36 +42,12 @@ $result = $conexion->query($sql);
               Agregar nuevo Ingreso
               <span class="glyphicon glyphicon-plus"></span>
               </button>
-            </a>
-            <table class="table table-sm table-bordered">
-              <tr>
-                <th>Nombre</th>
-                <th>Fecha</th>
-                <th>Grado</th>
-                <th>Grupo</th>
-                <th>Semestre</th>
-                <th>Carrera</th>
-                <th>Concepto</th>
-                <th>Costo</th>
-              </tr>
-              <?php
-                if($result->num_rows > 0){
-                  while($row = $result->fetch_assoc()){
-                    echo "<tr>";
-                    echo "<td>$row[nombre] $row[apellido_paterno] $row[apellido_materno]</td>";
-                    echo "<td>$row[fecha_ingreso]</td>";
-                    echo "<td>$row[grado]</td>";
-                    echo "<td>$row[grupo]</td>";
-                    echo "<td>$row[semestre]</td>";
-                    echo "<td>$row[carrera]</td>";
-                    echo "<td>$row[concepto]</td>";
-                    echo "<td>$ $row[costo]</td>";
-                    echo "</tr>";
-                  }
-                }
-              ?>
-
-              </tr>
+            </a><br>
+            Fecha Inicio:
+            <input class="form-control" type="date" value="" id="fecha_inicio" name="fecha_inicio">
+            Fecha Fin:
+            <input class="form-control" type="date" value="" id="fecha_fin" name="fecha_fin">
+            <table id="historial_ingresos" class="table table-sm table-bordered">
             </table>
           </div>
         </div>
@@ -80,3 +56,29 @@ $result = $conexion->query($sql);
   </div>
 </body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+    getHistorialIngresos();
+		$('#fecha_inicio').change(function(){
+			getHistorialIngresos();
+		})
+    $('#fecha_fin').change(function(){
+      getHistorialIngresos();
+    })
+	})
+</script>
+<script type="text/javascript">
+	function getHistorialIngresos(){
+		$.ajax({
+			type:"POST",
+			url:"./ajax/historial_ingresos.php",
+			data: {
+        "fecha_inicio":$('#fecha_inicio').val(),
+        "fecha_fin":$('#fecha_fin').val()
+      },
+			success:function(r){
+				$('#historial_ingresos').html(r);
+			}
+		})
+	}
+</script>

@@ -5,7 +5,8 @@
 
         	<a class="dropdown-item" href="HistorialIngresos.php">Historial Ingresos</a>
         	<a class="dropdown-item" href="HistorialEgresos.php">Historial Egresos</a>
-        	<a class="dropdown-item" href="AgregarIncidencia.php">Cedula de control de incidencias</a>
+			<a class="dropdown-item" href="AgregarIncidencia.php">Cedula de control de incidencias</a>
+			<a class="dropdown-item" href="AgregarDocente.php">Agregar Docente</a>
         	<a class="dropdown-item" href="Consulta.php">Consulta</a>
     	</div>';
 
