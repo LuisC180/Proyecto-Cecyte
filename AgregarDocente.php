@@ -239,13 +239,53 @@ if (isset($_POST['nombre'])) {
                         <input type="text" class="form-control uppercase" name="horas">
                       </div>
                     </div>
-                    <br>
-                    <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>
+
+                   
                   </div>
                 </div>
               </div>
             </div>
           </form>
+          <br>
+<!--Se agrego INFORMACIÓN ACADEMICA   inicio-->
+                <div class="row">      
+                <div class="col-md">        
+                <div class="card border-success">
+                <div class="card-body">
+                  <center><h3 class="card-title">INFORMACIÓN ACADEMICA</h3></center>
+
+                <div class="row">
+                <div class="col-md-4">
+                  <STRONG>Último grado de estudios:</STRONG>
+                  <select class="form-control" name="cmbEstatus">
+                  <option></option>
+                  <option value="3">Primaria</option>
+                  <option value="4">Secundaria/sec. técnica</option>
+                  <option value="5">Carrera comercial</option>
+                  <option value="6">Carrera técnica</option>
+                  <option value="7">Profesional técnico (CONALEP)</option>
+                  <option value="8">Prepa o vocacional</option>
+                  <option value="9">T. superior universitario</option>
+                  <option value="10">Licenciatura</option>
+                  <option value="11">Maestría</option>
+                  <option value="12">Doctorado</option>
+                  </select name=concepto>
+                  <br>
+    
+               </div>
+
+
+              <div class="col-md-8">
+                <STRONG> Carrera o especialidad</STRONG><br>
+                <input type="text" class="form-control uppercase" name="txtNumEmp">
+              </div>
+              </div> 
+ <!--Se agrego INFORMACIÓN ACADEMICA   FIN-->
+
+                    <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>   
+       
+      </div>
+    </div>
   </body>
 
   </html>
