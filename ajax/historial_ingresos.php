@@ -4,7 +4,19 @@ require('../conexion.php');
 if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
     $fecha_inicio = $_POST['fecha_inicio'];
     $fecha_fin = $_POST['fecha_fin'];
-    $sql = "SELECT * FROM ingresos JOIN ingresos_conceptos ON ingresos.concepto = ingresos_conceptos.id WHERE fecha_ingreso <= '$fecha_fin' AND fecha_ingreso >= '$fecha_inicio'";
+    $sql = "SELECT
+    ingresos.id,
+    ingresos.nombre,
+    ingresos.apellido_paterno,
+    ingresos.apellido_materno,
+    ingresos.fecha_ingreso,
+    ingresos.grado,
+    ingresos.grupo,
+    ingresos.semestre,
+    ingresos.carrera,
+    ingresos_conceptos.concepto,
+    ingresos_conceptos.costo
+    FROM ingresos JOIN ingresos_conceptos ON ingresos.concepto = ingresos_conceptos.id WHERE ingresos.fecha_ingreso <= '$fecha_fin' AND ingresos.fecha_ingreso >= '$fecha_inicio'";
     $result = $conexion->query($sql);
 
     echo "<tr>
@@ -29,6 +41,10 @@ if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
             echo "<td>$row[carrera]</td>";
             echo "<td>$row[concepto]</td>";
             echo "<td>$ $row[costo]</td>";
+            echo "<td>
+            <a type='button' class='btn btn-sm btn-success' href='GuardarIngreso.php?id=$row[id]'>Modificar</a>
+            <a type='button' class='btn btn-sm btn-success' href='BorrarRegistro.php?id=$row[id]&tabla=ingresos'>Borrar</a>
+            </td>";
             echo "</tr>";
         }
     }

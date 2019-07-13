@@ -1,8 +1,7 @@
 <?php
-if (isset($_POST['nombre'])){
-
-	require('conexion.php');
-
+require('conexion.php');
+//REGISTRO NUEVO EN LA BASE DE DATOS
+if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 	$sql = "INSERT INTO ingresos 
 	(apellido_paterno, apellido_materno, nombre, fecha_ingreso, grado, grupo, semestre, carrera, concepto, costo)
 	VALUES ('$_POST[apellido_paterno]', '$_POST[apellido_materno]', '$_POST[nombre]', '$_POST[fecha_ingreso]', 
@@ -14,9 +13,36 @@ if (isset($_POST['nombre'])){
 	} else {
 		echo "Error: ".$sql."<br>".$conexion->error;
 	}
-
-}else{
+}else if(isset($_POST['nombre']) AND $_POST['id'] != null) {
+	$sql = "UPDATE ingresos SET 
+	apellido_paterno = '$_POST[apellido_paterno]', 
+	apellido_materno = '$_POST[apellido_materno]', 
+	nombre = '$_POST[nombre]', 
+	fecha_ingreso = '$_POST[fecha_ingreso]',
+	grado = '$_POST[grado]',
+	grupo = '$_POST[grupo]',
+	semestre = '$_POST[semestre]',
+	carrera = '$_POST[carrera]',
+	concepto = '$_POST[concepto]',
+	costo = '$_POST[costo]'
+	WHERE id = $_POST[id]";
+  
+	if ($conexion->query($sql) === TRUE) {
+	  echo "<h1>Operacion Exitosa!<h1>";
+	  echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+	} else {
+	  echo "Error: " . $sql . "<br>" . $conexion->error;
+	}
+  //MUESTRA EL FORMULARIO Y EN CASO DE TENER ID MUESTRA LOS DATOS DEL REGISTRO
+  } else {
+	if (isset($_GET['id'])) {
+	  $sql = "SELECT * FROM ingresos WHERE id = $_GET[id]";
+	  $result = $conexion->query($sql);
+	  $row = $result->fetch_assoc();
+	}
+	
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -59,19 +85,20 @@ if (isset($_POST['nombre'])){
 				</center>
 				<div class="card border-success">
 					<div class="card-body">
-						<form action="./AgregarIngreso.php" method="POST">
+						<form action="./GuardarIngreso.php" method="POST">
+						<input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
 							<div class="row">
 								<div class="col-md-4">
 									<STRONG>Apellido Paterno: </STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Paterno" name="apellido_paterno">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Paterno" name="apellido_paterno" value="<?php echo isset($row['apellido_paterno']) ? $row['apellido_paterno'] : "" ?>">
 								</div>
 								<div class="col-md-4">
 									<STRONG>Apellido Materno: </STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Materno" name="apellido_materno">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Materno" name="apellido_materno" value="<?php echo isset($row['apellido_materno']) ? $row['apellido_materno'] : "" ?>">
 								</div>
 								<div class="col-md-4">
 									<STRONG>Nombre(s):</STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa Nombre" name="nombre">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa Nombre" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : "" ?>">
 								</div>
 							</div>
 							<br>
@@ -79,15 +106,15 @@ if (isset($_POST['nombre'])){
 							<div class="row">
 								<div class="col-sm-4">
 									<STRONG>Fecha:</STRONG><br><br>
-									<input class="form-control" type="date" value="" name="fecha_ingreso">
+									<input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : "" ?>">
 								</div>
 								<div class="col-sm-4">
 									<STRONG>Grado:</STRONG><br><br>
-									<input class="form-control" type="grado" class="form-control" placeholder="Grado" name="grado">
+									<input class="form-control" type="grado" class="form-control" placeholder="Grado" name="grado" value="<?php echo isset($row['grado']) ? $row['grado'] : "" ?>">
 								</div>
 								<div class="col-sm-4">
 									<STRONG>Grupo:</STRONG><br><br>
-									<input class="form-control" type="grupo" placeholder="Grupo" name="grupo">
+									<input class="form-control" type="grupo" placeholder="Grupo" name="grupo" value="<?php echo isset($row['grupo']) ? $row['grupo'] : "" ?>">
 								</div>
 							</div>
 							<br>
@@ -97,17 +124,17 @@ if (isset($_POST['nombre'])){
 									<STRONG>semestre:</STRONG>
 									<select class="form-control" name="semestre">
 										<option></option>
-										<option>Febrero-Julio</option>
-										<option>Agosto-Diciembre</option>
+										<option <?php if(isset($row['semestre']) && $row['semestre'] == "Febrero-Julio"){ echo "selected"; } ?>>Febrero-Julio</option>
+										<option <?php if(isset($row['semestre']) && $row['semestre'] == "Agosto-Diciembre"){ echo "selected"; } ?>>Agosto-Diciembre</option>
 									</select name=concepto>
 								</div>
 								<div class="col-md-6">
 									<STRONG>Carrera:</STRONG>
 									<select class="form-control" name="carrera">
 										<option></option>
-										<option>Soporte y Matenimiento al Equipo de Computo</option>
-										<option>Enfermeria General</option>
-										<option>Proceso de Gestión Administrativa</option>
+										<option <?php if(isset($row['carrera']) && $row['carrera'] == "Soporte y Matenimiento al Equipo de Computo"){ echo "selected"; } ?>>Soporte y Matenimiento al Equipo de Computo</option>
+										<option <?php if(isset($row['carrera']) && $row['carrera'] == "Enfermeria General"){ echo "selected"; } ?>>Enfermeria General</option>
+										<option <?php if(isset($row['carrera']) && $row['carrera'] == "Proceso de Gestión Administrativa"){ echo "selected"; } ?>>Proceso de Gestión Administrativa</option>
 									</select>
 								</div>
 							</div>
@@ -125,8 +152,13 @@ $sql = "SELECT * FROM ingresos_conceptos";
 $result = $conexion->query($sql);
 
 if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()){
-	echo "<option value='$row[id]'> $row[concepto] </option>";
+	while($row2 = $result->fetch_assoc()){
+		if(isset($row['concepto']) && $row['concepto'] == $row2['id']){
+			echo "<option value='$row2[id]' selected> $row2[concepto] </option>";
+		}else{
+			echo "<option value='$row2[id]'> $row2[concepto] </option>";
+		}
+	
 	}
 }
 ?>
@@ -134,7 +166,7 @@ if($result->num_rows > 0){
 								</div>
 								<div class="col-md-6">
 									<STRONG>Valor $:</STRONG>
-									<input id="costo" class="form-control" name="costo" value="0"><br>
+									<input id="costo" class="form-control" name="costo" value="<?php echo isset($row['costo']) ? $row['costo'] : 0 ?>"><br>
 								</div>
 							</div>
 							<div class="col-md-6">

@@ -38,7 +38,7 @@ $result = $conexion->query($sql);
           <div class="col-sm-12">
             <h2>Historial de ingresos alumnos</h2>
             <br><br>
-            <a button type="button" class="btn btn-success" href="AgregarIngreso.php">
+            <a button type="button" class="btn btn-success" href="GuardarIngreso.php">
               Agregar nuevo Ingreso
               <span class="glyphicon glyphicon-plus"></span>
               </button>
