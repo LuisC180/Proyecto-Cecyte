@@ -1,8 +1,7 @@
 <?php
-if (isset($_POST['nombre'])) {
-
-  require('conexion.php');
-
+require('conexion.php');
+//REGISTRO NUEVO EN LA BASE DE DATOS
+if (isset($_POST['nombre']) AND $_POST['id'] == null) {
   $sql = "INSERT INTO egresos 
 	(nombre, detalle, costo, fecha_egreso)
 	VALUES ('$_POST[nombre]', '$_POST[detalle]', '$_POST[costo]', '$_POST[fecha_egreso]')";
@@ -13,7 +12,25 @@ if (isset($_POST['nombre'])) {
   } else {
     echo "Error: " . $sql . "<br>" . $conexion->error;
   }
+//ACTUALIZA REGISTRO EN LA BASE DE DATOS
+}else if(isset($_POST['nombre']) AND $_POST['id'] != null) {
+  $sql = "UPDATE egresos SET nombre = '$_POST[nombre]', detalle = '$_POST[detalle]', costo = '$_POST[costo]', fecha_egreso = '$_POST[fecha_egreso]'
+  WHERE id = $_POST[id]";
+
+  if ($conexion->query($sql) === TRUE) {
+    echo "<h1>Operacion Exitosa!<h1>";
+    echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conexion->error;
+  }
+//MUESTRA EL FORMULARIO Y EN CASO DE TENER ID MUESTRA LOS DATOS DEL REGISTRO
 } else {
+  if (isset($_GET['id'])) {
+    $sql = "SELECT * FROM egresos WHERE id = $_GET[id]";
+    $result = $conexion->query($sql);
+    $row = $result->fetch_assoc();
+  }
+  
   ?>
   <!DOCTYPE html>
   <html lang="es">
@@ -53,23 +70,24 @@ if (isset($_POST['nombre'])) {
           </center>
           <div class="card border-success">
             <div class="card-body">
-              <form action="./AgregarEgreso.php" method="POST">
+              <form action="./GuardarEgreso.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
                 <div class="row">
                   <div class="col-xl-12">
                     <label>Nombre de egreso: </label>
-                    <input type="text" class="form-control uppercase" placeholder="Digite egreso" name="nombre">
+                    <input type="text" class="form-control uppercase" placeholder="Digite egreso" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : "" ?>">
                   </div>
                   <div class="col-xl-12">
                     <label>Detalle egreso: </label>
-                    <input type="text" class="form-control uppercase" placeholder="Digite detalle" name="detalle">
+                    <input type="text" class="form-control uppercase" placeholder="Digite detalle" name="detalle" value="<?php echo isset($row['detalle']) ? $row['detalle'] : "" ?>">
                   </div>
                   <div class="col-sm-6">
                     <label>Valor $: </label>
-                    <input type="text" class="form-control uppercase" name="costo">
+                    <input type="text" class="form-control uppercase" name="costo" value="<?php echo isset($row['costo']) ? $row['costo'] : "" ?>">
                   </div>
                   <div class="col-sm-6">
                     <label>Fecha: </label>
-                    <input class="form-control" type="date"  name="fecha_egreso">
+                    <input class="form-control" type="date"  name="fecha_egreso" value="<?php echo isset($row['fecha_egreso']) ? $row['fecha_egreso'] : "" ?>">
                   </div>
                 </div>
                 <br>

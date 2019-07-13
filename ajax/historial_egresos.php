@@ -12,6 +12,7 @@ if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
         <th>Detalle</th>
         <th>Costo</th>
         <th>Fecha Egreso</th>
+        <th>Operaciones</th>
     </tr>";
 
     if ($result->num_rows > 0) {
@@ -21,6 +22,10 @@ if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
             echo "<td>$row[detalle]</td>";
             echo "<td>$row[costo]</td>";
             echo "<td>$row[fecha_egreso]</td>";
+            echo "<td>
+            <a type='button' class='btn btn-sm btn-success' href='GuardarEgreso.php?id=$row[id]'>Modificar</a>
+            <a type='button' class='btn btn-sm btn-success' href='BorrarRegistro.php?id=$row[id]&tabla=egresos'>Borrar</a>
+            </td>";
             echo "</tr>";
         }
     }

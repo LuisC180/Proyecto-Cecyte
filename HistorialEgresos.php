@@ -34,7 +34,7 @@
           <div class="col-sm-12">
             <h2>Historial Egresos</h2>
             <br><br>
-            <a button type="button" class="btn btn-success" href="AgregarEgreso.php">
+            <a button type="button" class="btn btn-success" href="GuardarEgreso.php">
               Agregar nuevo Egreso
               <span class="glyphicon glyphicon-plus"></span>
               </button></a>
@@ -58,10 +58,10 @@
     getHistorialEgresos();
 		$('#fecha_inicio').change(function(){
 			getHistorialEgresos();
-		})
+		});
     $('#fecha_fin').change(function(){
       getHistorialEgresos();
-    })
+    });
 	})
 </script>
 <script type="text/javascript">
