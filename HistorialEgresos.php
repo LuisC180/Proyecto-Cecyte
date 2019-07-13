@@ -43,6 +43,8 @@
             <input class="form-control" type="date" value="" id="fecha_inicio" name="fecha_inicio">
             Fecha Fin:
             <input class="form-control" type="date" value="" id="fecha_fin" name="fecha_fin">
+            Busqueda:
+            <input type="text" type="text" id="busqueda" name="busqueda" class="form-control">
             <table id="historial_egresos" class="table table-sm table-bordered">
             </table>
           </div>
@@ -55,23 +57,38 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-    getHistorialEgresos();
+    getHistorialEgresosFecha();
 		$('#fecha_inicio').change(function(){
-			getHistorialEgresos();
+			getHistorialEgresosFecha();
 		});
     $('#fecha_fin').change(function(){
-      getHistorialEgresos();
+      getHistorialEgresosFecha();
     });
+    $('#busqueda').keypress(function(){
+      getHistorialEgresosBusqueda();
+    })
 	})
 </script>
 <script type="text/javascript">
-	function getHistorialEgresos(){
+	function getHistorialEgresosFecha(){
 		$.ajax({
 			type:"POST",
 			url:"./ajax/historial_egresos.php",
 			data: {
         "fecha_inicio":$('#fecha_inicio').val(),
         "fecha_fin":$('#fecha_fin').val()
+      },
+			success:function(r){
+				$('#historial_egresos').html(r);
+			}
+		})
+	}
+  function getHistorialEgresosBusqueda(){
+		$.ajax({
+			type:"POST",
+			url:"./ajax/historial_egresos.php",
+			data: {
+        "busqueda":$('#busqueda').val(),
       },
 			success:function(r){
 				$('#historial_egresos').html(r);

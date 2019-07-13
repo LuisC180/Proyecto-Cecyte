@@ -47,6 +47,8 @@ $result = $conexion->query($sql);
             <input class="form-control" type="date" value="" id="fecha_inicio" name="fecha_inicio">
             Fecha Fin:
             <input class="form-control" type="date" value="" id="fecha_fin" name="fecha_fin">
+            Busqueda:
+            <input type="text" type="text" id="busqueda" name="busqueda" class="form-control">
             <table id="historial_ingresos" class="table table-sm table-bordered">
             </table>
           </div>
@@ -58,23 +60,38 @@ $result = $conexion->query($sql);
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-    getHistorialIngresos();
+    getHistorialIngresosFecha();
 		$('#fecha_inicio').change(function(){
-			getHistorialIngresos();
+			getHistorialIngresosFecha();
 		})
     $('#fecha_fin').change(function(){
-      getHistorialIngresos();
+      getHistorialIngresosFecha();
+    })
+    $('#busqueda').keypress(function(){
+      getHistorialIngresosBusqueda();
     })
 	})
 </script>
 <script type="text/javascript">
-	function getHistorialIngresos(){
+	function getHistorialIngresosFecha(){
 		$.ajax({
 			type:"POST",
 			url:"./ajax/historial_ingresos.php",
 			data: {
         "fecha_inicio":$('#fecha_inicio').val(),
         "fecha_fin":$('#fecha_fin').val()
+      },
+			success:function(r){
+				$('#historial_ingresos').html(r);
+			}
+		})
+	}
+  function getHistorialIngresosBusqueda(){
+		$.ajax({
+			type:"POST",
+			url:"./ajax/historial_ingresos.php",
+			data: {
+        "busqueda":$('#busqueda').val(),
       },
 			success:function(r){
 				$('#historial_ingresos').html(r);

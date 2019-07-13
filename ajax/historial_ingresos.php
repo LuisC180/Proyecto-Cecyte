@@ -18,8 +18,24 @@ if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
     ingresos_conceptos.costo
     FROM ingresos JOIN ingresos_conceptos ON ingresos.concepto = ingresos_conceptos.id WHERE ingresos.fecha_ingreso <= '$fecha_fin' AND ingresos.fecha_ingreso >= '$fecha_inicio'";
     $result = $conexion->query($sql);
-
-    echo "<tr>
+}else if(isset($_POST['busqueda'])){
+    $sql = "SELECT
+    ingresos.id,
+    ingresos.nombre,
+    ingresos.apellido_paterno,
+    ingresos.apellido_materno,
+    ingresos.fecha_ingreso,
+    ingresos.grado,
+    ingresos.grupo,
+    ingresos.semestre,
+    ingresos.carrera,
+    ingresos_conceptos.concepto,
+    ingresos_conceptos.costo
+    FROM ingresos JOIN ingresos_conceptos ON ingresos.concepto = ingresos_conceptos.id 
+    WHERE ingresos.nombre LIKE '%$_POST[busqueda]%' OR ingresos_conceptos.concepto LIKE '%$_POST[busqueda]%'";
+    $result = $conexion->query($sql);
+} 
+echo "<tr>
         <th>Nombre</th>
         <th>Fecha</th>
         <th>Grado</th>
@@ -43,10 +59,10 @@ if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
             echo "<td>$ $row[costo]</td>";
             echo "<td>
             <a type='button' class='btn btn-sm btn-success' href='GuardarIngreso.php?id=$row[id]'>Modificar</a>
+            <a type='button' class='btn btn-sm btn-success' href='ImprimirIngreso.php?id=$row[id]'>Imprimir</a>
             <a type='button' class='btn btn-sm btn-success' href='BorrarRegistro.php?id=$row[id]&tabla=ingresos'>Borrar</a>
             </td>";
             echo "</tr>";
         }
     }
-}
 ?>
