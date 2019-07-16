@@ -5,11 +5,11 @@ if (isset($_POST['nombre'])) {
 
   $sql = "INSERT INTO docentes 
 	(apellido_paterno, apellido_materno, nombre, rfc, curp, fecha_nacimiento, tipo_sangre, lugar_nacimiento, nss, correo_electronico, telefono_casa, telefono_celular,
-  colonia, calle, numero_domicilio, codigo_postal, municipio, estado, numero_empleado, fecha_ingreso, estatus, departamento, puesto, horas)
+  colonia, calle, numero_domicilio, codigo_postal, municipio, estado, numero_empleado, fecha_ingreso, estatus, departamento, puesto, horas, ultimo_grado_estudios, carrera_especialidad)
 	VALUES ('$_POST[apellido_paterno]', '$_POST[apellido_materno]', '$_POST[nombre]', '$_POST[rfc]', '$_POST[curp]', '$_POST[fecha_nacimiento]', '$_POST[tipo_sangre]', 
   '$_POST[lugar_nacimiento]', '$_POST[nss]', '$_POST[correo_electronico]',  '$_POST[telefono_casa]', '$_POST[telefono_celular]', '$_POST[colonia]', '$_POST[calle]',
   '$_POST[numero_domicilio]', '$_POST[codigo_postal]',  '$_POST[municipio]', '$_POST[estado]', '$_POST[numero_empleado]', '$_POST[fecha_ingreso]', '$_POST[estatus]',
-  '$_POST[departamento]', '$_POST[puesto]', '$_POST[horas]')";
+  '$_POST[departamento]', '$_POST[puesto]', '$_POST[horas]', '$_POST[ultimo_grado_estudios]', '$_POST[carrera_especialidad]')";
 
   if ($conexion->query($sql) === TRUE) {
     echo "<h1>Operacion Exitosa!<h1>";
@@ -53,7 +53,7 @@ if (isset($_POST['nombre'])) {
           <center>
             <h2 class="card-title">ALTA PERSONAL</h2>
           </center><br><br>
-          <form action="./AgregarDocente.php" method="POST">
+          <form action="./GuardarDocente.php" method="POST">
             <div class="row">
               <div class="col-md">
                 <div class="card border-success">
@@ -245,10 +245,8 @@ if (isset($_POST['nombre'])) {
                 </div>
               </div>
             </div>
-          </form>
-          <br>
-<!--Se agrego INFORMACIÓN ACADEMICA   inicio-->
-                <div class="row">      
+            <br>
+            <div class="row">      
                 <div class="col-md">        
                 <div class="card border-success">
                 <div class="card-body">
@@ -257,7 +255,7 @@ if (isset($_POST['nombre'])) {
                 <div class="row">
                 <div class="col-md-4">
                   <STRONG>Último grado de estudios:</STRONG>
-                  <select class="form-control" name="cmbEstatus">
+                  <select class="form-control" name="ultimo_grado_estudios">
                   <option></option>
                   <option value="3">Primaria</option>
                   <option value="4">Secundaria/sec. técnica</option>
@@ -269,7 +267,7 @@ if (isset($_POST['nombre'])) {
                   <option value="10">Licenciatura</option>
                   <option value="11">Maestría</option>
                   <option value="12">Doctorado</option>
-                  </select name=concepto>
+                  </select>
                   <br>
     
                </div>
@@ -277,13 +275,17 @@ if (isset($_POST['nombre'])) {
 
               <div class="col-md-8">
                 <STRONG> Carrera o especialidad</STRONG><br>
-                <input type="text" class="form-control uppercase" name="txtNumEmp">
+                <input type="text" class="form-control uppercase" name="carrera_especialidad">
               </div>
               </div> 
  <!--Se agrego INFORMACIÓN ACADEMICA   FIN-->
 
                     <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>   
        
+          </form>
+          
+<!--Se agrego INFORMACIÓN ACADEMICA   inicio-->
+                
       </div>
     </div>
   </body>

@@ -7,7 +7,7 @@
         	<a class="dropdown-item" href="HistorialEgresos.php">Historial Egresos</a>
 			<a class="dropdown-item" href="GuardarIncidencia.php">Cedula de control de incidencias</a>
 			<a class="dropdown-item" href="GuardarDocente.php">Agregar Docente</a>
-        	<a class="dropdown-item" href="Consulta.php">Consulta</a>
+        	<a class="dropdown-item" href="ListaInventario.php">Inventario</a>
     	</div>';
 
 ?> 

@@ -1,3 +1,20 @@
+<?php
+if (isset($_POST['id_empleado'])) {
+
+  require('conexion.php');
+
+  $sql = "INSERT INTO incidencias
+	(id_empleado, fecha_incidencia, clausula, asunto, documentacion, motivos)
+	VALUES ('$_POST[id_empleado]', '$_POST[fecha_incidencia]', '$_POST[clausula]', '$_POST[asunto]', '$_POST[documentacion]', '$_POST[motivos]')";
+
+  if ($conexion->query($sql) === TRUE) {
+    echo "<h1>Operacion Exitosa!<h1>";
+    echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conexion->error;
+  }
+} else {
+?>
 <!doctype html>
 <html lang="en">
 
@@ -35,6 +52,7 @@
         <center>
           <h2 class="card-title">CEDULA DE CONTROL DE INCIDENCIAS</h2>
         </center><br><br>
+        <form action="./GuardarIncidencia.php" method="POST">
         <div class="row">
           <div class="col-md">
             <div class="card border-success">
@@ -65,18 +83,18 @@ if($result->num_rows > 0){
 
                   <div class="col-xl-4">
                     <STRONG>Solicitud de fecha:</STRONG><br><br>
-                    <input class="form-control" placeholder="Ingrese fecha" name="puesto"><br>
+                    <input class="form-control" placeholder="Ingrese fecha" name="fecha_incidencia"><br>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-xl-8">
                     <STRONG>Puesto:</STRONG><br><br>
-                    <input type="text" class="form-control uppercase" placeholder="Digite Puesto" id="puesto" name="numero_empleado"><br>
+                    <input type="text" class="form-control uppercase" placeholder="Digite Puesto" id="puesto" disabled><br>
                   </div>
                   <div class="col-xl-4">
                     <STRONG>No.empleado:</STRONG><br><br>
-                    <input type="text" class="form-control uppercase" placeholder="Digite No.Emp" id="numero_empleado" name="numero_empleado"><br>
+                    <input type="text" class="form-control uppercase" placeholder="Digite No.Emp" id="numero_empleado" disabled><br>
                   </div>
                 </div>
               </div>
@@ -95,25 +113,25 @@ if($result->num_rows > 0){
                     <div class="row">
                       <div class="col-xl-4">
                         <STRONG>Cláusula CCT:</STRONG><br><br>
-                        <input type="text" class="form-control uppercase" placeholder="Digite Cláusula" name="txt_Clausula"><br>
+                        <input type="text" class="form-control uppercase" placeholder="Digite Cláusula" name="clausula"><br>
                       </div>
 
                       <div class="col-xl-8">
                         <STRONG>Asunto:</STRONG><br><br>
-                        <input type="text" class="form-control uppercase" placeholder="Digite Asunto" name="txt_Asunto"><br>
+                        <input type="text" class="form-control uppercase" placeholder="Digite Asunto" name="asunto"><br>
                       </div>
                     </div>
 
                     <div class="row">
                       <div class="col-xl-4">
                         <STRONG>Documentacion que se anexa:</STRONG><br><br>
-                        <input type="text" class="form-control uppercase" placeholder="Digite documentación" name="txt_Asunto"><br>
-                        <a href="#" class="btn btn-success">GUARDAR</a>
+                        <input type="text" class="form-control uppercase" placeholder="Digite documentación" name="documentacion"><br>
+                        <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                       </div>
 
                       <div class="col-xl-8">
                         <STRONG>Lo anterior por los siguientes motivos:</STRONG><br><br>
-                        <textarea class="form-control" placeholder="Digite Motivos" rows="3"></textarea>
+                        <textarea class="form-control" placeholder="Digite Motivos" rows="3" name="motivos"></textarea>
                       </div>
                     </div>
                   </div>
@@ -121,6 +139,7 @@ if($result->num_rows > 0){
               </div>
 
             </div>
+            </form>
 
 </body>
 
@@ -153,3 +172,4 @@ if($result->num_rows > 0){
 		});
 	}
 </script>
+<?php } ?>
