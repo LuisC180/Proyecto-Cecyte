@@ -1,3 +1,4 @@
+
 <?php
 require('../conexion.php');
 
@@ -14,8 +15,9 @@ echo "<tr>
     <th>Articulo</th>
     <th>Descripcion</th>
     <th>Precio</th>
-    <th>Cantidad</th>
-    <th>Fecha Ingreso</th>
+    <th>piezas</th>
+    <th>Estado</th>
+    <th>Fecha</th>
     <th>Operaciones</th>
 </tr>";
 
@@ -26,6 +28,7 @@ if ($result->num_rows > 0) {
         echo "<td>$row[descripcion]</td>";
         echo "<td>$row[precio]</td>";
         echo "<td>$row[cantidad]</td>";
+        echo "<td>$row[estado]</td>";
         echo "<td>$row[fecha_ingreso]</td>";
         echo "<td>
         <a type='button' class='btn btn-sm btn-success' href='GuardarInventario.php?id=$row[id]'>Modificar</a>
@@ -33,6 +36,9 @@ if ($result->num_rows > 0) {
         <a type='button' class='btn btn-sm btn-success' href='BorrarRegistro.php?id=$row[id]&tabla=inventario'>Borrar</a>
         </td>";
         echo "</tr>";
+
+
     }
 }
+
 ?>

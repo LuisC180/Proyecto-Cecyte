@@ -60,7 +60,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',14);
 
 $pdf->Cell(40,10,'Nombre Completo:');
-$pdf->Cell(0,10,$alumno[3]." ".$alumno[1]." ".$alumno[2],0,1,"C");
+$pdf->Cell(0,10,$alumno[2]." ".$alumno[3]." ".$alumno[1],0,1,"C");
 $pdf->Cell(40,10,'Grado y Grupo:');
 $pdf->Cell(0,10,$alumno[5]." ".$alumno[6],0,1,"C");
 $pdf->Cell(40,10,'Semestre:');
@@ -69,6 +69,8 @@ $pdf->Cell(40,10,'Carrera:');
 $pdf->Cell(0,10,$alumno[8],0,1,"C");
 $pdf->Cell(40,10,'Concepto:');
 $pdf->Cell(0,10,$alumno[9],0,1,"C");
+$pdf->Cell(40,10,'Costo:');
+$pdf->Cell(0,10," $".$alumno[10],0,1,"C");
 $pdf->Cell(40,10,'Fecha de Pago:');
 $pdf->Cell(0,10,$alumno[4],0,1,"C");
 $pdf->Cell(0,0,"",50,1);

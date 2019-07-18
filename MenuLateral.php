@@ -6,8 +6,11 @@
         	<a class="dropdown-item" href="HistorialIngresos.php">Historial Ingresos</a>
         	<a class="dropdown-item" href="HistorialEgresos.php">Historial Egresos</a>
 			<a class="dropdown-item" href="GuardarIncidencia.php">Cedula de control de incidencias</a>
-			<a class="dropdown-item" href="GuardarDocente.php">Agregar Docente</a>
-        	<a class="dropdown-item" href="ListaInventario.php">Inventario</a>
+			<a class="dropdown-item" href="">Historial de incidencias</a>
+			<a class="dropdown-item" href="GuardarDocente.php">Agregar Personal</a>
+			<a class="dropdown-item" href="">Historial de Personal</a>
+        	<a class="dropdown-item" href="ListaInventario.php">Historial de Inventario</a>
+        	
     	</div>';
 
 ?> 
