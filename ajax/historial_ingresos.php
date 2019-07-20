@@ -37,13 +37,14 @@ if (isset($_POST['fecha_inicio']) && isset($_POST['fecha_fin'])) {
 } 
 echo "<tr>
         <th>Nombre</th>
-        <th>Fecha</th>
+        <th>Fecha de ingreso</th>
         <th>Grado</th>
         <th>Grupo</th>
         <th>Semestre</th>
         <th>Carrera</th>
         <th>Concepto</th>
         <th>Costo</th>
+        <th>Operaciones</th>
     </tr>";
 
     if ($result->num_rows > 0) {

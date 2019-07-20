@@ -2,9 +2,11 @@
 $id = $_GET['id'];
 
 require_once "conexion.php";
-$sql = "SELECT ingresos.id, ingresos.nombre, ingresos.apellido_paterno, ingresos.apellido_materno, ingresos.fecha_ingreso, ingresos.grado, ingresos.grupo, ingresos.semestre, ingresos.carrera, ingresos_conceptos.concepto, ingresos_conceptos.costo
-    FROM ingresos JOIN ingresos_conceptos ON ingresos.concepto = ingresos_conceptos.id WHERE ingresos.id = $id";
-$result = $conexion->query($sql);
+
+
+$consulta = "SELECT * from egresos where id='$id'";
+$result = mysqli_query($conexion,$consulta);
+
 $alumno = mysqli_fetch_row($result);
 
 include("FPDF/fpdf.php");
@@ -15,7 +17,7 @@ class PDF extends FPDF
 function Header()
 {
 
-	
+    
     // Logo
      $this->Image('imagenes/Rio Grande2.jpg',10,8,33);
     $this->Image('imagenes/imagen2_opt.jpg',170,8,33);
@@ -31,7 +33,7 @@ function Header()
     $this->Cell(10,-15,'PLANTEL:RIO GRANDE 32ETC0003W',0,1,'C');
     
     // Título
-    $this->Cell(30,35,'INGRESO',0,1,'C');
+    $this->Cell(30,35,'Egreso',0,1,'C');
     // Salto de línea
     $this->Ln(1);
     // Movernos a la derecha
@@ -59,19 +61,15 @@ $pdf->AddPage();
 
 $pdf->SetFont('Arial','B',14);
 
-$pdf->Cell(40,10,'Nombre Completo:');
-$pdf->Cell(0,10,$alumno[3]." ".$alumno[1]." ".$alumno[2],0,1,"C");
-$pdf->Cell(40,10,'Grado y Grupo:');
-$pdf->Cell(0,10,$alumno[5]." ".$alumno[6],0,1,"C");
-$pdf->Cell(40,10,'Semestre:');
-$pdf->Cell(0,10,$alumno[7],0,1,"C");
-$pdf->Cell(40,10,'Carrera:');
-$pdf->Cell(0,10,$alumno[8],0,1,"C");
-$pdf->Cell(40,10,'Concepto:');
-$pdf->Cell(0,10,$alumno[9],0,1,"C");
-$pdf->Cell(40,10,'Fecha de Pago:');
+$pdf->Cell(40,10,'Nombre del Egreso:');
+$pdf->Cell(0,10,$alumno[1],0,1,"C");
+$pdf->Cell(40,10,'Detalle del Egreso:');
+$pdf->Cell(0,10,$alumno[2],0,1,"C");
+$pdf->Cell(40,10,'Costo:');
+$pdf->Cell(0,10,$alumno[3],0,1,"C");
+$pdf->Cell(40,10,'Fecha del Egreso:');
 $pdf->Cell(0,10,$alumno[4],0,1,"C");
-$pdf->Cell(0,0,"",50,1);
+
 
 $pdf->Output();
 

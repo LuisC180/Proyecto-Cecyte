@@ -8,6 +8,7 @@
 			<a class="dropdown-item" href="HistorialIncidencias.php">Incidencias</a>
 			<a class="dropdown-item" href="ListaDocentes.php">Docentes</a>
         	<a class="dropdown-item" href="ListaInventario.php">Inventario</a>
+
     	</div>';
 
 ?> 
