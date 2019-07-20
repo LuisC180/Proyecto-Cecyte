@@ -3,10 +3,10 @@
         	<h6 class="dropdown-header">Menú</h6>
         	<div class="dropdown-divider"></div>
 
-        	<a class="dropdown-item" href="HistorialIngresos.php">Historial Ingresos</a>
-        	<a class="dropdown-item" href="HistorialEgresos.php">Historial Egresos</a>
-			<a class="dropdown-item" href="GuardarIncidencia.php">Cedula de control de incidencias</a>
-			<a class="dropdown-item" href="GuardarDocente.php">Agregar Docente</a>
+        	<a class="dropdown-item" href="HistorialIngresos.php">Ingresos</a>
+        	<a class="dropdown-item" href="HistorialEgresos.php">Egresos</a>
+			<a class="dropdown-item" href="HistorialIncidencias.php">Incidencias</a>
+			<a class="dropdown-item" href="ListaDocentes.php">Docentes</a>
         	<a class="dropdown-item" href="ListaInventario.php">Inventario</a>
     	</div>';
 
