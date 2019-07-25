@@ -1,2 +1,0 @@
-# Proyecto-Cecyte
-Para titulación

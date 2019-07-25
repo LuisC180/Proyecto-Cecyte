@@ -1,3 +1,13 @@
+<?php
+    session_start();
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+
+    }else{
+        echo "<h1>Por Favor Inicia Sesión<h1>";
+        echo "<script> setTimeout(function () { window.location.href='Login.php'; },3000); </script>";
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 

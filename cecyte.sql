@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `docentes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cecyte.docentes: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla cecyte.docentes: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `docentes` DISABLE KEYS */;
-INSERT INTO `docentes` (`id`, `apellido_paterno`, `apellido_materno`, `nombre`, `rfc`, `curp`, `fecha_nacimiento`, `tipo_sangre`, `lugar_nacimiento`, `nss`, `correo_electronico`, `telefono_casa`, `telefono_celular`, `colonia`, `calle`, `numero_domicilio`, `codigo_postal`, `municipio`, `estado`, `numero_empleado`, `fecha_ingreso`, `estatus`, `departamento`, `puesto`, `horas`, `ultimo_grado_estudios`, `carrera_especialidad`) VALUES
+REPLACE INTO `docentes` (`id`, `apellido_paterno`, `apellido_materno`, `nombre`, `rfc`, `curp`, `fecha_nacimiento`, `tipo_sangre`, `lugar_nacimiento`, `nss`, `correo_electronico`, `telefono_casa`, `telefono_celular`, `colonia`, `calle`, `numero_domicilio`, `codigo_postal`, `municipio`, `estado`, `numero_empleado`, `fecha_ingreso`, `estatus`, `departamento`, `puesto`, `horas`, `ultimo_grado_estudios`, `carrera_especialidad`) VALUES
 	(1, 'Batres', 'Juarez', 'Juan Luis', 'BAJJ961117CD3', 'BAJJ961117HZSTRN00', '1996-11-17', 'O+', 'Rio Grande', '66159604868', 'juanluis.batresjuarez@live.com', '9825243', '4981026432', 'Centro', 'Reforma', '', '98400', 'Rio Grande', 'Zacatecas', '230', '2019-01-01', 'Empleado Base', 'Finanzas', 'Jefe de todo el pedo', 2, NULL, NULL),
 	(2, 'Batres', 'Juarez', 'Juan Luis', 'BAJJ961117CD3', 'BAJJ961117HZSTRN00', '1996-11-17', 'O+', 'Rio Grande', '66159604868', 'juanluis.batresjuarez@live.com', '9825243', '4981026432', 'Centro', 'Reforma', '26', '98400', 'Rio Grande', 'Zacatecas', '231', '2019-01-01', 'Empleado Base', 'Finanzas', 'Jefe de todo el pedo', 2, NULL, NULL),
 	(3, 'Ramirez', 'CastaÃ±eda', 'Jose', 'ABCDEGD', 'asdfkjlsd', '1999-10-18', 'b2', 'fresnillo', '654156', 'jose@mail.com', '49351564564', '498456156', 'Centro', 'Rio Grande', '66', '98355', 'Rio Grande', 'Zacatecas', '656', '2018-10-17', 'Empleado Base', 'Finanzas', 'Drogas', 16, '3', 'Educacion Fisic');
@@ -64,12 +64,10 @@ CREATE TABLE IF NOT EXISTS `egresos` (
   `costo` float NOT NULL,
   `fecha_egreso` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla cecyte.egresos: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `egresos` DISABLE KEYS */;
-INSERT INTO `egresos` (`id`, `nombre`, `detalle`, `costo`, `fecha_egreso`) VALUES
-	(2, 'Bandera', 'Bandera para los honores', 2500, '2019-07-20');
 /*!40000 ALTER TABLE `egresos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla cecyte.incidencias
@@ -84,9 +82,9 @@ CREATE TABLE IF NOT EXISTS `incidencias` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cecyte.incidencias: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla cecyte.incidencias: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
-INSERT INTO `incidencias` (`id`, `id_empleado`, `fecha_incidencia`, `clausula`, `asunto`, `documentacion`, `motivos`) VALUES
+REPLACE INTO `incidencias` (`id`, `id_empleado`, `fecha_incidencia`, `clausula`, `asunto`, `documentacion`, `motivos`) VALUES
 	(1, 3, '16 17 y 18 de Narzi', '654', 'Rso', 'PaÃ±el', '16');
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 
@@ -104,13 +102,14 @@ CREATE TABLE IF NOT EXISTS `ingresos` (
   `concepto` int(11) NOT NULL,
   `costo` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cecyte.ingresos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla cecyte.ingresos: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `ingresos` DISABLE KEYS */;
-INSERT INTO `ingresos` (`id`, `apellido_paterno`, `apellido_materno`, `nombre`, `fecha_ingreso`, `grado`, `grupo`, `semestre`, `carrera`, `concepto`, `costo`) VALUES
+REPLACE INTO `ingresos` (`id`, `apellido_paterno`, `apellido_materno`, `nombre`, `fecha_ingreso`, `grado`, `grupo`, `semestre`, `carrera`, `concepto`, `costo`) VALUES
 	(10, 'QUIRINO', 'ADAME', 'JOSE CARLOS', '2019-07-06', 6, 'A', 'Febrero-Julio', 'Enfermeria General', 8, 300),
-	(11, 'BATRES', 'JUAREZ', 'JUAN LUIS', '2019-07-12', 6, 'B', 'Febrero-Julio', 'Soporte y Matenimiento al Equipo de Computo', 3, 25);
+	(11, 'BATRES', 'JUAREZ', 'JUAN LUIS', '2019-07-12', 6, 'B', 'Febrero-Julio', 'Soporte y Matenimiento al Equipo de Computo', 3, 25),
+	(12, 'Jose Manuel', 'Figueroa', 'Sanchez', '2020-08-26', 6, 'B', 'Febrero-Julio', 'Enfermeria General', 9, 600);
 /*!40000 ALTER TABLE `ingresos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla cecyte.ingresos_conceptos
@@ -121,9 +120,9 @@ CREATE TABLE IF NOT EXISTS `ingresos_conceptos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cecyte.ingresos_conceptos: ~13 rows (aproximadamente)
+-- Volcando datos para la tabla cecyte.ingresos_conceptos: ~11 rows (aproximadamente)
 /*!40000 ALTER TABLE `ingresos_conceptos` DISABLE KEYS */;
-INSERT INTO `ingresos_conceptos` (`id`, `concepto`, `costo`) VALUES
+REPLACE INTO `ingresos_conceptos` (`id`, `concepto`, `costo`) VALUES
 	(1, 'Certificado', 100),
 	(2, 'Reposición o Duplicado de Certificados', 250),
 	(3, 'Constancia de estudios', 25),
@@ -164,14 +163,32 @@ CREATE TABLE IF NOT EXISTS `inventario` (
   `ubicacion` tinytext NOT NULL,
   `empleado` tinytext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cecyte.inventario: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla cecyte.inventario: ~5 rows (aproximadamente)
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
-INSERT INTO `inventario` (`id`, `articulo`, `descripcion`, `precio`, `cantidad`, `proveedores`, `origenes`, `serie`, `fecha_ingreso`, `tipo`, `fecha_registro`, `estatus`, `marca`, `modelo`, `mes`, `ano`, `imagen`, `categorias`, `estado`, `area`, `ubicacion`, `empleado`) VALUES
+REPLACE INTO `inventario` (`id`, `articulo`, `descripcion`, `precio`, `cantidad`, `proveedores`, `origenes`, `serie`, `fecha_ingreso`, `tipo`, `fecha_registro`, `estatus`, `marca`, `modelo`, `mes`, `ano`, `imagen`, `categorias`, `estado`, `area`, `ubicacion`, `empleado`) VALUES
 	(1, 'Computadora', 'Laptop', 3500, 1, 'Dell', 'Guadalajara', '123', '2019-10-10', 'Computo', '2019-09-09', 'Activo', 'Dell', 'axsd', '1', '2019', NULL, 'Laptop', '2', 'Comercio', 'RÃ­o Grande', 'Jose'),
-	(2, 'Escritorio', 'Escritorio para oficina', 3500, 1, 'Printform', 'frenillo', 'a546', '2019-07-07', 'Mobiliario', '2019-06-06', 'Activo', 'Tamagochi', 'a5469', '3', '2019', NULL, 'Escritorio', '1', 'Gestion', 'Rio Grande', 'Arturo Hernandez');
+	(2, 'Escritorio', 'Escritorio para oficina', 3500, 1, 'Printform', 'frenillo', 'a546', '2019-07-07', 'Mobiliario', '2019-06-06', 'Activo', 'Tamagochi', 'a5469', '3', '2019', 'd0493cd00b18d54038ae10024172a523.png', 'Escritorio', '3', 'Gestion', 'Rio Grande', 'Arturo Hernandez'),
+	(3, '1', '1', 1, 1, '1', '1', '1', '1996-10-10', '10', '1996-10-10', '10', '1', '1', '1', '2019', NULL, '1', '1', '1', '1', '1'),
+	(4, '1', '1', 1, 1, '1', '1', '1', '1996-10-10', '10', '1996-10-10', '10', '1', '1', '1', '2019', NULL, '1', '1', '1', '1', '1'),
+	(5, '1', '1', 1, 1, '1', '1', '1', '1996-10-10', '10', '1996-10-10', '10', '1', '1', '1', '2019', '243439c7620dc25a884ecd6248628872.png', '1', '1', '1', '1', '1');
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
+
+-- Volcando estructura para tabla cecyte.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` tinytext NOT NULL,
+  `correo` tinytext NOT NULL,
+  `contrasena` tinytext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla cecyte.usuarios: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+REPLACE INTO `usuarios` (`id`, `nombre`, `correo`, `contrasena`) VALUES
+	(1, 'admin', 'admin@mail.com', '$2y$10$iy.VKG1COXeTtLCl6t7qRu/j0bgjxdthDi7lSe6daA1iTU1kMIj1q');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

@@ -1,52 +1,91 @@
 <?php
+    session_start();
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+
+    }else{
+        echo "<h1>Por Favor Inicia Sesión<h1>";
+        echo "<script> setTimeout(function () { window.location.href='Login.php'; },3000); </script>";
+        exit;
+    }
+?>
+<?php
 require('conexion.php');
 //REGISTRO NUEVO EN LA BASE DE DATOS
-if (isset($_POST['articulo']) AND $_POST['id'] == null) {
-	$sql = "INSERT INTO inventario
-	(articulo, descripcion, precio, cantidad, proveedores, origenes, serie, fecha_ingreso, tipo, fecha_registro, estatus, marca, modelo,
-  mes, ano, categorias, estado, area, ubicacion, empleado)
-	VALUES ('$_POST[articulo]', '$_POST[descripcion]', '$_POST[precio]', '$_POST[cantidad]', '$_POST[proveedores]', '$_POST[origenes]', '$_POST[serie]', '$_POST[fecha_ingreso]', '$_POST[tipo]', 
-  '$_POST[fecha_registro]', '$_POST[estatus]', '$_POST[marca]', '$_POST[modelo]', '$_POST[mes]', '$_POST[ano]', '$_POST[categorias]', '$_POST[estado]', '$_POST[area]', '$_POST[ubicacion]', 
-  '$_POST[empleado]')";
-
-	if ($conexion->query($sql) === TRUE){
-		echo "<h1>Operacion Exitosa!<h1>";
-		echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
-	} else {
-		echo "Error: ".$sql."<br>".$conexion->error;
-	}
-}else if(isset($_POST['articulo']) AND $_POST['id'] != null) {
-	$sql = "UPDATE inventario SET 
-	articulo = '$_POST[articulo]', 
-	descripcion = '$_POST[descripcion]', 
-	precio = '$_POST[precio]', 
-	cantidad = '$_POST[cantidad]',
-	proveedores = '$_POST[proveedores]',
-	origenes = '$_POST[origenes]',
-	serie = '$_POST[serie]',
-	fecha_ingreso = '$_POST[fecha_ingreso]',
-	tipo = '$_POST[tipo]',
-	fecha_registro = '$_POST[fecha_registro]',
-  estatus = '$_POST[estatus]',
-  marca = '$_POST[marca]',
-  modelo = '$_POST[modelo]',
-  mes = '$_POST[mes]',
-  ano = '$_POST[ano]',
-  categorias = '$_POST[categorias]',
-  estado = '$_POST[estado]',
-  area = '$_POST[area]',
-  ubicacion = '$_POST[ubicacion]',
-  empleado = '$_POST[empleado]'
-	WHERE id = $_POST[id]";
+if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen']) AND $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+  $fileTmpPath = $_FILES['imagen']['tmp_name'];
+  $fileName = $_FILES['imagen']['name'];
+  $fileSize = $_FILES['imagen']['size'];
+  $fileType = $_FILES['imagen']['type'];
+  $fileNameCmps = explode(".", $fileName);
+  $fileExtension = strtolower(end($fileNameCmps));
+  $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+  $uploadFileDir = './imagenes/inventario/';
+  $dest_path = $uploadFileDir . $newFileName;
   
-	if ($conexion->query($sql) === TRUE) {
-	  echo "<h1>Operacion Exitosa!<h1>";
-	  echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
-	} else {
-	  echo "Error: " . $sql . "<br>" . $conexion->error;
-	}
+  if(move_uploaded_file($fileTmpPath, $dest_path))
+  {
+    $sql = "INSERT INTO inventario
+    (articulo, descripcion, precio, cantidad, proveedores, origenes, serie, fecha_ingreso, tipo, fecha_registro, estatus, marca, modelo,
+    mes, ano, imagen, categorias, estado, area, ubicacion, empleado)
+    VALUES ('$_POST[articulo]', '$_POST[descripcion]', '$_POST[precio]', '$_POST[cantidad]', '$_POST[proveedores]', '$_POST[origenes]', '$_POST[serie]', '$_POST[fecha_ingreso]', '$_POST[tipo]', 
+    '$_POST[fecha_registro]', '$_POST[estatus]', '$_POST[marca]', '$_POST[modelo]', '$_POST[mes]', '$_POST[ano]', '$newFileName', '$_POST[categorias]', '$_POST[estado]', '$_POST[area]', '$_POST[ubicacion]', 
+    '$_POST[empleado]')";
+
+    if ($conexion->query($sql) === TRUE){
+      echo "<h1>Operacion Exitosa!<h1>";
+      echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+    } else {
+      echo "Error: ".$sql."<br>".$conexion->error;
+    }
+  }
+	
+}else if(isset($_POST['articulo']) AND $_POST['id'] != null AND isset($_FILES['imagen']) AND $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+  $fileTmpPath = $_FILES['imagen']['tmp_name'];
+  $fileName = $_FILES['imagen']['name'];
+  $fileSize = $_FILES['imagen']['size'];
+  $fileType = $_FILES['imagen']['type'];
+  $fileNameCmps = explode(".", $fileName);
+  $fileExtension = strtolower(end($fileNameCmps));
+  $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+  $uploadFileDir = './imagenes/inventario/';
+  $dest_path = $uploadFileDir . $newFileName;
+  
+  if(move_uploaded_file($fileTmpPath, $dest_path))
+  {
+
+    $sql = "UPDATE inventario SET 
+    articulo = '$_POST[articulo]', 
+    descripcion = '$_POST[descripcion]', 
+    precio = '$_POST[precio]', 
+    cantidad = '$_POST[cantidad]',
+    proveedores = '$_POST[proveedores]',
+    origenes = '$_POST[origenes]',
+    serie = '$_POST[serie]',
+    fecha_ingreso = '$_POST[fecha_ingreso]',
+    tipo = '$_POST[tipo]',
+    fecha_registro = '$_POST[fecha_registro]',
+    estatus = '$_POST[estatus]',
+    marca = '$_POST[marca]',
+    modelo = '$_POST[modelo]',
+    mes = '$_POST[mes]',
+    ano = '$_POST[ano]',
+    imagen = '$newFileName',
+    categorias = '$_POST[categorias]',
+    estado = '$_POST[estado]',
+    area = '$_POST[area]',
+    ubicacion = '$_POST[ubicacion]',
+    empleado = '$_POST[empleado]'
+    WHERE id = $_POST[id]";
+    
+    if ($conexion->query($sql) === TRUE) {
+      echo "<h1>Operacion Exitosa!<h1>";
+      echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+    } else {
+      echo "Error: " . $sql . "<br>" . $conexion->error;
+    }
+  }
   //MUESTRA EL FORMULARIO Y EN CASO DE TENER ID MUESTRA LOS DATOS DEL REGISTRO
-  } else {
+} else {
 	if (isset($_GET['id'])) {
 	  $sql = "SELECT * FROM inventario WHERE id = $_GET[id]";
 	  $result = $conexion->query($sql);
@@ -98,7 +137,7 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null) {
         </center>
         <div class="card border-success">
           <div class="card-body">
-            <form action="./GuardarInventario.php" method="POST">
+            <form action="./GuardarInventario.php" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
               <div class="row">
 
@@ -170,6 +209,10 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null) {
                 <div class="col-sm-3">
                   <STRONG>Modelo:</STRONG><br>
                   <input class="form-control" type="text" name="modelo" value="<?php echo isset($row['modelo']) ? $row['modelo'] : "" ?>">
+                </div>
+                <div class="col-sm-3">
+                  <STRONG>Imagen:</STRONG><br>
+                  <img src="./imagenes/inventario/<?php echo isset($row['imagen']) ? $row['imagen'] : "" ?>" class="img-thumbnail">
                 </div>
                 </div>
                   <br>

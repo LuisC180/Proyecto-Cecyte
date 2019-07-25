@@ -13,10 +13,10 @@
 				        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				          <ul class="navbar-nav mr-auto">
 				           <li class="nav-item">
-				              <a class="nav-link mr-1 " href="#"><center> <i class="far fa-user"></center></i></a>
+				              <a class="nav-link mr-1 " href="Login.php"><center> <i class="far fa-user"></center></i></a>
 				            </li>
 				             <li class="nav-item">
-				              <a class="nav-link" href="#"><center> <i class="fas fa-power-off"></center></i></a>
+				              <a class="nav-link" href="logout.php"><center> <i class="fas fa-power-off"></center></i></a>
 				            </li>
 				          </ul>
 				        </div>
