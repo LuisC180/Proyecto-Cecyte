@@ -18,6 +18,7 @@ echo "<tr>
     <th>piezas</th>
     <th>Estado</th>
     <th>Fecha</th>
+    <th>Imagen</th>
     <th>Operaciones</th>
 </tr>";
 
@@ -28,8 +29,24 @@ if ($result->num_rows > 0) {
         echo "<td>$row[descripcion]</td>";
         echo "<td>$row[precio]</td>";
         echo "<td>$row[cantidad]</td>";
-        echo "<td>$row[estado]</td>";
+        echo "<td>";
+        switch($row['estado']){
+            case 1:
+                echo "BUENO";
+                break;
+            case 2:
+                echo "REGULAR";
+                break;
+            case 3:
+                echo "MALO";
+                break;
+            default:
+                echo $row['estado'];
+                break;
+        }
+        echo "</td>";
         echo "<td>$row[fecha_ingreso]</td>";
+        echo "<td>"."<img src='./imagenes/inventario/$row[imagen]' class='img-thumbnail'>"."</td>";
         echo "<td>
         <a type='button' class='btn btn-sm btn-success' href='GuardarInventario.php?id=$row[id]'>Modificar</a>
         <a type='button' class='btn btn-sm btn-success' href='ImprimirInventario.php?id=$row[id]'>Imprimir</a>

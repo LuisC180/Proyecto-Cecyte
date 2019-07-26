@@ -83,7 +83,7 @@
 	function getListaDocentesFecha(){
 		$.ajax({
 			type:"POST",
-			url:"./ajax/historial_incidencias.php",
+			url:"./ajax/lista_docentes.php",
 			data: {
         "fecha_inicio":$('#fecha_inicio').val(),
         "fecha_fin":$('#fecha_fin').val()
