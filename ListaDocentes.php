@@ -42,10 +42,10 @@
       <div class="col-sm-9">
         <div class="row">
           <div class="col-sm-12">
-            <h2>Docentes</h2>
+            <h2>Personal</h2>
             <br><br>
             <a button type="button" class="btn btn-success" href="GuardarDocente.php">
-              Agregar Docente
+              Agregar Personal
               <span class="glyphicon glyphicon-plus"></span>
               </button></a>
               <br>

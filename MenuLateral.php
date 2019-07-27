@@ -5,9 +5,10 @@
 
         	<a class="dropdown-item" href="HistorialIngresos.php">Ingresos</a>
         	<a class="dropdown-item" href="HistorialEgresos.php">Egresos</a>
-			<a class="dropdown-item" href="HistorialIncidencias.php">Incidencias</a>
-			<a class="dropdown-item" href="ListaDocentes.php">Docentes</a>
         	<a class="dropdown-item" href="ListaInventario.php">Inventario</a>
+			<a class="dropdown-item" href="HistorialIncidencias.php">Incidencias</a>
+			<a class="dropdown-item" href="ListaDocentes.php">Personal</a>
+        	
 
     	</div>';
 
