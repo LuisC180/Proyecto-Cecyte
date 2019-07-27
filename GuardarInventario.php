@@ -39,51 +39,77 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
     }
   }
 	
-}else if(isset($_POST['articulo']) AND $_POST['id'] != null AND isset($_FILES['imagen']) AND $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-  $fileTmpPath = $_FILES['imagen']['tmp_name'];
-  $fileName = $_FILES['imagen']['name'];
-  $fileSize = $_FILES['imagen']['size'];
-  $fileType = $_FILES['imagen']['type'];
-  $fileNameCmps = explode(".", $fileName);
-  $fileExtension = strtolower(end($fileNameCmps));
-  $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-  $uploadFileDir = './imagenes/inventario/';
-  $dest_path = $uploadFileDir . $newFileName;
-  
-  if(move_uploaded_file($fileTmpPath, $dest_path))
-  {
+}else if(isset($_POST['articulo']) AND $_POST['id'] != null) {
+  if(isset($_FILES['imagen']) AND $_FILES['imagen']['error'] === UPLOAD_ERR_OK){
+    $fileTmpPath = $_FILES['imagen']['tmp_name'];
+    $fileName = $_FILES['imagen']['name'];
+    $fileSize = $_FILES['imagen']['size'];
+    $fileType = $_FILES['imagen']['type'];
+    $fileNameCmps = explode(".", $fileName);
+    $fileExtension = strtolower(end($fileNameCmps));
+    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+    $uploadFileDir = './imagenes/inventario/';
+    $dest_path = $uploadFileDir . $newFileName;
+    if(move_uploaded_file($fileTmpPath, $dest_path))
+    {
 
-    $sql = "UPDATE inventario SET 
-    articulo = '$_POST[articulo]', 
-    descripcion = '$_POST[descripcion]', 
-    precio = '$_POST[precio]', 
-    cantidad = '$_POST[cantidad]',
-    proveedores = '$_POST[proveedores]',
-    origenes = '$_POST[origenes]',
-    serie = '$_POST[serie]',
-    fecha_ingreso = '$_POST[fecha_ingreso]',
-    tipo = '$_POST[tipo]',
-    fecha_registro = '$_POST[fecha_registro]',
-    estatus = '$_POST[estatus]',
-    marca = '$_POST[marca]',
-    modelo = '$_POST[modelo]',
-    mes = '$_POST[mes]',
-    ano = '$_POST[ano]',
-    imagen = '$newFileName',
-    categorias = '$_POST[categorias]',
-    estado = '$_POST[estado]',
-    area = '$_POST[area]',
-    ubicacion = '$_POST[ubicacion]',
-    empleado = '$_POST[empleado]'
-    WHERE id = $_POST[id]";
-    
-    if ($conexion->query($sql) === TRUE) {
-      echo "<h1>Operacion Exitosa!<h1>";
-      echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
-    } else {
-      echo "Error: " . $sql . "<br>" . $conexion->error;
+      $sql = "UPDATE inventario SET 
+      articulo = '$_POST[articulo]', 
+      descripcion = '$_POST[descripcion]', 
+      precio = '$_POST[precio]', 
+      cantidad = '$_POST[cantidad]',
+      proveedores = '$_POST[proveedores]',
+      origenes = '$_POST[origenes]',
+      serie = '$_POST[serie]',
+      fecha_ingreso = '$_POST[fecha_ingreso]',
+      tipo = '$_POST[tipo]',
+      fecha_registro = '$_POST[fecha_registro]',
+      estatus = '$_POST[estatus]',
+      marca = '$_POST[marca]',
+      modelo = '$_POST[modelo]',
+      mes = '$_POST[mes]',
+      ano = '$_POST[ano]',
+      imagen = '$newFileName',
+      categorias = '$_POST[categorias]',
+      estado = '$_POST[estado]',
+      area = '$_POST[area]',
+      ubicacion = '$_POST[ubicacion]',
+      empleado = '$_POST[empleado]'
+      WHERE id = $_POST[id]";
     }
+  }else{
+    $sql = "UPDATE inventario SET 
+      articulo = '$_POST[articulo]', 
+      descripcion = '$_POST[descripcion]', 
+      precio = '$_POST[precio]', 
+      cantidad = '$_POST[cantidad]',
+      proveedores = '$_POST[proveedores]',
+      origenes = '$_POST[origenes]',
+      serie = '$_POST[serie]',
+      fecha_ingreso = '$_POST[fecha_ingreso]',
+      tipo = '$_POST[tipo]',
+      fecha_registro = '$_POST[fecha_registro]',
+      estatus = '$_POST[estatus]',
+      marca = '$_POST[marca]',
+      modelo = '$_POST[modelo]',
+      mes = '$_POST[mes]',
+      ano = '$_POST[ano]',
+      categorias = '$_POST[categorias]',
+      estado = '$_POST[estado]',
+      area = '$_POST[area]',
+      ubicacion = '$_POST[ubicacion]',
+      empleado = '$_POST[empleado]'
+      WHERE id = $_POST[id]";
   }
+        
+  if ($conexion->query($sql) === TRUE) {
+    echo "<h1>Operacion Exitosa!<h1>";
+    echo "<script> setTimeout(function () { window.location.href='index.php'; },3000); </script>";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conexion->error;
+  }
+  
+  
   //MUESTRA EL FORMULARIO Y EN CASO DE TENER ID MUESTRA LOS DATOS DEL REGISTRO
 } else {
 	if (isset($_GET['id'])) {

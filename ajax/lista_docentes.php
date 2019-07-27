@@ -28,7 +28,7 @@ if ($result->num_rows > 0) {
         echo "<td>$row[numero_empleado]</td>";
         echo "<td>$row[puesto]</td>";
         echo "<td>
-        <!-- <a type='button' class='btn btn-sm btn-success' href='GuardarEgreso.php?id=$row[id]'>Modificar</a> -->
+        <a type='button' class='btn btn-sm btn-success' href='GuardarDocente.php?id=$row[id]'>Modificar</a>
         <a type='button' class='btn btn-sm btn-success' href='ImprimirDocente.php?id=$row[id]'>Imprimir</a>
         <a type='button' class='btn btn-sm btn-success' href='BorrarRegistro.php?id=$row[id]&tabla=docentes'>Borrar</a>
         </td>";
