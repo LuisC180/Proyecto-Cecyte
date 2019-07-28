@@ -73,6 +73,22 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 	<link rel="stylesheet" type="text/css" href="css/style_pie_pagina.css">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	    
+     <script src="js/validCampoFranz.js"></script>
+       <script type="text/javascript">
+            $(function(){
+                //Para escribir solo letras
+                $('#apaterno').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#amaterno').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#nombre1').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#group').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+
+                //Para escribir solo numeros    
+                $('#grado').validCampoFranz('0123456789');    
+            });
+        </script>        
+
 </head>
 
 <body>
@@ -96,19 +112,20 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 				<div class="card border-success">
 					<div class="card-body">
 						<form action="./GuardarIngreso.php" method="POST">
+							  <form novalidate>
 						<input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
 							<div class="row">
 								<div class="col-md-4">
 									<STRONG>Apellido Paterno: </STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Paterno" name="apellido_paterno" value="<?php echo isset($row['apellido_paterno']) ? $row['apellido_paterno'] : "" ?>">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Paterno" name="apellido_paterno" id="apaterno" value="<?php echo isset($row['apellido_paterno']) ? $row['apellido_paterno'] : "" ?>"required>
 								</div>
 								<div class="col-md-4">
 									<STRONG>Apellido Materno: </STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Materno" name="apellido_materno" value="<?php echo isset($row['apellido_materno']) ? $row['apellido_materno'] : "" ?>">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa apellido Materno" name="apellido_materno" id="amaterno" value="<?php echo isset($row['apellido_materno']) ? $row['apellido_materno'] : "" ?>"required>
 								</div>
 								<div class="col-md-4">
 									<STRONG>Nombre(s):</STRONG><br><br>
-									<input type="text" class="form-control uppercase" placeholder="Ingresa Nombre" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : "" ?>">
+									<input type="text" class="form-control uppercase" placeholder="Ingresa Nombre" name="nombre" id="nombre1" value="<?php echo isset($row['nombre']) ? $row['nombre'] : "" ?>"required>
 								</div>
 							</div>
 							<br>
@@ -116,15 +133,15 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 							<div class="row">
 								<div class="col-sm-4">
 									<STRONG>Fecha:</STRONG><br><br>
-									<input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : "" ?>">
+									<input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : "" ?>"required>
 								</div>
 								<div class="col-sm-4">
 									<STRONG>Grado:</STRONG><br><br>
-									<input class="form-control" type="grado" class="form-control" placeholder="Grado" name="grado" value="<?php echo isset($row['grado']) ? $row['grado'] : "" ?>">
+									<input class="form-control" type="grado" class="form-control" placeholder="Grado" id="grado" name="grado" value="<?php echo isset($row['grado']) ? $row['grado'] : "" ?>"required>
 								</div>
 								<div class="col-sm-4">
 									<STRONG>Grupo:</STRONG><br><br>
-									<input class="form-control" type="grupo" placeholder="Grupo" name="grupo" value="<?php echo isset($row['grupo']) ? $row['grupo'] : "" ?>">
+									<input class="form-control" type="grupo" placeholder="Grupo" name="grupo" id="group" value="<?php echo isset($row['grupo']) ? $row['grupo'] : "" ?>"required>
 								</div>
 							</div>
 							<br>
@@ -132,7 +149,7 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 							<div class="row">
 								<div class="col-md-6">
 									<STRONG>semestre:</STRONG>
-									<select class="form-control" name="semestre">
+									<select class="form-control" name="semestre"required>
 										<option></option>
 										<option <?php if(isset($row['semestre']) && $row['semestre'] == "Febrero-Julio"){ echo "selected"; } ?>>Febrero-Julio</option>
 										<option <?php if(isset($row['semestre']) && $row['semestre'] == "Agosto-Diciembre"){ echo "selected"; } ?>>Agosto-Diciembre</option>
@@ -140,7 +157,7 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 								</div>
 								<div class="col-md-6">
 									<STRONG>Carrera:</STRONG>
-									<select class="form-control" name="carrera">
+									<select class="form-control" name="carrera"required>
 										<option></option>
 										<option <?php if(isset($row['carrera']) && $row['carrera'] == "Soporte y Matenimiento al Equipo de Computo"){ echo "selected"; } ?>>Soporte y Matenimiento al Equipo de Computo</option>
 										<option <?php if(isset($row['carrera']) && $row['carrera'] == "Enfermeria General"){ echo "selected"; } ?>>Enfermeria General</option>
@@ -186,6 +203,7 @@ if($result->num_rows > 0){
 					</div>
 				</div>
 			</div>
+			</form>
 			</form>
 		</div>
 	</div>

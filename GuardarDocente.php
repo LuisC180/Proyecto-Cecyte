@@ -85,6 +85,35 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
     <link rel="stylesheet" type="text/css" href="css/style_menu_izquierdo_alumno.css">
     <link rel="stylesheet" type="text/css" href="css/style_pie_pagina.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+     <script src="js/validCampoFranz.js"></script>
+       <script type="text/javascript">
+            $(function(){
+                //Para escribir solo letras
+                $('#apaterno').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#amaterno').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#nombre1').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#nacimiento').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#municipio').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#estado').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#puesto').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#carrera').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#dep').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                            
+
+                //Para escribir solo numeros    
+                $('#seguro').validCampoFranz('0123456789');
+                $('#Ncasa').validCampoFranz('0123456789');
+                $('#Ntel').validCampoFranz('0123456789');
+                $('#NoCasa').validCampoFranz('0123456789');
+                $('#postal').validCampoFranz('0123456789');
+                $('#Empleado').validCampoFranz('0123456789');
+                $('#horas').validCampoFranz('0123456789');
+
+          
+            });
+        </script>        
+
   </head>
 
   <body>
@@ -104,6 +133,7 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
             <h2 class="card-title">ALTA PERSONAL</h2>
           </center><br><br>
           <form action="./GuardarDocente.php" method="POST">
+          <form novalidate>
           <input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
             <div class="row">
               <div class="col-md">
@@ -117,18 +147,18 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>Apellido Paterno: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="apellido_paterno" value="<?php echo isset($row['apellido_paterno']) ? $row['apellido_paterno'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="apaterno" name="apellido_paterno" value="<?php echo isset($row['apellido_paterno']) ? $row['apellido_paterno'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Apellido Materno: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="apellido_materno" value="<?php echo isset($row['apellido_materno']) ? $row['apellido_materno'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="amaterno" name="apellido_materno" value="<?php echo isset($row['apellido_materno']) ? $row['apellido_materno'] : null ?>"required>
                       </div>
 
 
                       <div class="col-md-4">
                         <STRONG>Nombre(s):</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="nombre1" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : null ?>"required>
                       </div>
                     </div>
                     <br>
@@ -136,15 +166,15 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>RFC: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="rfc" value="<?php echo isset($row['rfc']) ? $row['rfc'] : null ?>">
+                        <input type="text" class="form-control uppercase" name="rfc" value="<?php echo isset($row['rfc']) ? $row['rfc'] : null ?>"required>
                       </div>
                       <div class="col-md-4">
                         <STRONG>CURP: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="curp" value="<?php echo isset($row['curp']) ? $row['curp'] : null ?>">
+                        <input type="text" class="form-control uppercase" name="curp" value="<?php echo isset($row['curp']) ? $row['curp'] : null ?>"required>
                       </div>
                       <div class="col-sm-4">
                         <STRONG>Fecha de nacimiento:</STRONG><br>
-                        <input class="form-control" type="date" name="fecha_nacimiento" value="<?php echo isset($row['fecha_nacimiento']) ? $row['fecha_nacimiento'] : null ?>">
+                        <input class="form-control" type="date" name="fecha_nacimiento" value="<?php echo isset($row['fecha_nacimiento']) ? $row['fecha_nacimiento'] : null ?>"required>
                       </div>
                     </div>
                     <br>
@@ -152,15 +182,15 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>Tipo de sangre: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="tipo_sangre" value="<?php echo isset($row['tipo_sangre']) ? $row['tipo_sangre'] : null ?>">
+                        <input type="text" class="form-control uppercase" name="tipo_sangre" value="<?php echo isset($row['tipo_sangre']) ? $row['tipo_sangre'] : null ?>"required>
                       </div>
                       <div class="col-md-4">
                         <STRONG>Lugar de nacimiento: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="lugar_nacimiento" value="<?php echo isset($row['lugar_nacimiento']) ? $row['lugar_nacimiento'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="nacimiento" name="lugar_nacimiento" value="<?php echo isset($row['lugar_nacimiento']) ? $row['lugar_nacimiento'] : null ?>"required>
                       </div>
                       <div class="col-md-4">
                         <STRONG>No.IMSS:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="nss" value="<?php echo isset($row['nss']) ? $row['nss'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="seguro" name="nss" value="<?php echo isset($row['nss']) ? $row['nss'] : null ?>"required>
                       </div>
                     </div>
                     <br>
@@ -168,17 +198,17 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>Correo electronico: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="correo_electronico" value="<?php echo isset($row['correo_electronico']) ? $row['correo_electronico'] : null ?>">
+                        <input type="text" class="form-control uppercase" name="correo_electronico" value="<?php echo isset($row['correo_electronico']) ? $row['correo_electronico'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Telefono de casa: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="telefono_casa" value="<?php echo isset($row['telefono_casa']) ? $row['telefono_casa'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="Ncasa" name="telefono_casa" value="<?php echo isset($row['telefono_casa']) ? $row['telefono_casa'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Telefono celular:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="telefono_celular" value="<?php echo isset($row['telefono_celular']) ? $row['telefono_celular'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="Ntel" name="telefono_celular" value="<?php echo isset($row['telefono_celular']) ? $row['telefono_celular'] : null ?>"required>
                       </div>
                     </div>
                     <br>
@@ -202,34 +232,34 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>Colonia o Comunidad: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="colonia" value="<?php echo isset($row['colonia']) ? $row['colonia'] : null ?>">
+                        <input type="text" class="form-control uppercase" name="colonia" value="<?php echo isset($row['colonia']) ? $row['colonia'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Calle:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="calle" value="<?php echo isset($row['calle']) ? $row['calle'] : null ?>">
+                        <input type="text" class="form-control uppercase" name="calle" value="<?php echo isset($row['calle']) ? $row['calle'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Numero:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="numero_domicilio" value="<?php echo isset($row['numero_domicilio']) ? $row['numero_domicilio'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="NoCasa" name="numero_domicilio" value="<?php echo isset($row['numero_domicilio']) ? $row['numero_domicilio'] : null ?>"required>
                       </div>
                     </div>
                     <br>
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>Codigo Postal: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="codigo_postal" value="<?php echo isset($row['codigo_postal']) ? $row['codigo_postal'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="postal" name="codigo_postal" value="<?php echo isset($row['codigo_postal']) ? $row['codigo_postal'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Municipio:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="municipio" value="<?php echo isset($row['municipio']) ? $row['municipio'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="municipio" name="municipio" value="<?php echo isset($row['municipio']) ? $row['municipio'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Estado:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="estado" value="<?php echo isset($row['estado']) ? $row['estado'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="estado" name="estado" value="<?php echo isset($row['estado']) ? $row['estado'] : null ?>"required>
                       </div>
                     </div>
                     <br>
@@ -253,17 +283,17 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>No.Empleado: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="numero_empleado" value="<?php echo isset($row['numero_empleado']) ? $row['numero_empleado'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="Empleado" name="numero_empleado" value="<?php echo isset($row['numero_empleado']) ? $row['numero_empleado'] : null ?>"required>
                       </div>
 
                       <div class="col-sm-4">
                         <STRONG>Fecha de ingreso:</STRONG><br>
-                        <input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : null ?>">
+                        <input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Estatus:</STRONG>
-                        <select class="form-control" name="estatus">
+                        <select class="form-control" name="estatus"required>
                           <option></option>
                           <option <?php if(isset($row['estatus']) && $row['estatus'] == "Empleado Base"){ echo "selected"; } ?>>Empleado Base</option>
                           <option <?php if(isset($row['estatus']) && $row['estatus'] == "Empleado Confianza"){ echo "selected"; } ?>>Empleado Confianza</option>
@@ -277,17 +307,17 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                     <div class="row">
                       <div class="col-md-4">
                         <STRONG>Departamento: </STRONG><br>
-                        <input type="text" class="form-control uppercase" name="departamento" value="<?php echo isset($row['departamento']) ? $row['departamento'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="dep" name="departamento" value="<?php echo isset($row['departamento']) ? $row['departamento'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Puesto:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="puesto" value="<?php echo isset($row['puesto']) ? $row['puesto'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="puesto" name="puesto" value="<?php echo isset($row['puesto']) ? $row['puesto'] : null ?>"required>
                       </div>
 
                       <div class="col-md-4">
                         <STRONG>Horas:</STRONG><br>
-                        <input type="text" class="form-control uppercase" name="horas" value="<?php echo isset($row['horas']) ? $row['horas'] : null ?>">
+                        <input type="text" class="form-control uppercase" id="horas" name="horas" value="<?php echo isset($row['horas']) ? $row['horas'] : null ?>"required>
                       </div>
                     </div>
 
@@ -306,7 +336,7 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
                 <div class="row">
                 <div class="col-md-4">
                   <STRONG>Último grado de estudios:</STRONG>
-                  <select class="form-control" name="ultimo_grado_estudios">
+                  <select class="form-control" name="ultimo_grado_estudios"required>
                   <option></option>
                   <option value="3" <?php if(isset($row['ultimo_grado_estudios']) && $row['ultimo_grado_estudios'] == "3"){ echo "selected"; } ?>>Primaria</option>
                   <option value="4" <?php if(isset($row['ultimo_grado_estudios']) && $row['ultimo_grado_estudios'] == "4"){ echo "selected"; } ?>>Secundaria/sec. técnica</option>
@@ -326,7 +356,7 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
 
               <div class="col-md-8">
                 <STRONG> Carrera o especialidad</STRONG><br>
-                <input type="text" class="form-control uppercase" name="carrera_especialidad" value="<?php echo isset($row['carrera_especialidad']) ? $row['carrera_especialidad'] : null ?>">
+                <input type="text" class="form-control uppercase" id="carrera" name="carrera_especialidad" value="<?php echo isset($row['carrera_especialidad']) ? $row['carrera_especialidad'] : null ?>"required>
               </div>
               </div> 
  <!--Se agrego INFORMACIÓN ACADEMICA   FIN-->

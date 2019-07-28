@@ -139,6 +139,27 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
   <link rel="stylesheet" type="text/css" href="css/style_pie_pagina.css">
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+   <script src="js/validCampoFranz.js"></script>
+       <script type="text/javascript">
+            $(function(){
+                //Para escribir solo letras
+                $('#Articulo').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#Marca').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#provedor').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#origen').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#categoria').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#area').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#ubicacion').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#empleado').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+
+
+
+               
+                
+            });
+        </script>        
+
 </head>
 
 <body>
@@ -164,20 +185,21 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
         <div class="card border-success">
           <div class="card-body">
             <form action="./GuardarInventario.php" method="POST" enctype="multipart/form-data">
+               <form novalidate>
               <input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
               <div class="row">
 
                 <div class="col-md-3">
                   <STRONG>Artículo: </STRONG><br>
-                  <input type="text" class="form-control uppercase"  name="articulo" value="<?php echo isset($row['articulo']) ? $row['articulo'] : "" ?>">
+                  <input type="text" class="form-control uppercase" id="Articulo" name="articulo" value="<?php echo isset($row['articulo']) ? $row['articulo'] : "" ?>"required>
                 </div>
                 <div class="col-md-6">
                   <STRONG>Descrpcion: </STRONG><br>
-                  <input type="text" class="form-control uppercase" name="descripcion" value="<?php echo isset($row['descripcion']) ? $row['descripcion'] : "" ?>">
+                  <input type="text" class="form-control uppercase" name="descripcion" value="<?php echo isset($row['descripcion']) ? $row['descripcion'] : "" ?>"required>
                 </div>
                <div class="col-md-3">
                   <STRONG>Precio Unitario: </STRONG><br>
-                  <input type="text" class="form-control uppercase" placeholder="$"  name="precio" value="<?php echo isset($row['precio']) ? $row['precio'] : "" ?>">
+                  <input type="text" class="form-control uppercase" placeholder="$" id="preciou"  name="precio" value="<?php echo isset($row['precio']) ? $row['precio'] : "" ?>"required>
                </div>
 
              </div>
@@ -186,19 +208,19 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
                 <div class="row">
                 <div class="col-sm-2">
                   <STRONG>Cantidad:</STRONG><br>
-                  <input class="form-control" type="text" name="cantidad" value="<?php echo isset($row['cantidad']) ? $row['cantidad'] : "" ?>">
+                  <input class="form-control" type="text" name="cantidad" id="cant" value="<?php echo isset($row['cantidad']) ? $row['cantidad'] : "" ?>"required>
                 </div>
                 <div class="col-sm-4">
                   <STRONG>Proveedores:</STRONG><br>
-                  <input class="form-control" type="text" name="proveedores" value="<?php echo isset($row['proveedores']) ? $row['proveedores'] : "" ?>">
+                  <input class="form-control" type="text" name="proveedores" id="provedor" value="<?php echo isset($row['proveedores']) ? $row['proveedores'] : "" ?>"required>
                 </div>
                 <div class="col-sm-3">
                   <STRONG>Origenes:</STRONG><br>
-                  <input class="form-control" type="text" name="origenes" value="<?php echo isset($row['origenes']) ? $row['origenes'] : "" ?>">
+                  <input class="form-control" type="text" name="origenes" id="origen" value="<?php echo isset($row['origenes']) ? $row['origenes'] : "" ?>"required>
                 </div>
                 <div class="col-sm-3">
                   <STRONG>No de Serie:</STRONG><br>
-                  <input class="form-control" type="text" name="serie" value="<?php echo isset($row['serie']) ? $row['serie'] : "" ?>">
+                  <input class="form-control" type="text" name="serie" value="<?php echo isset($row['serie']) ? $row['serie'] : "" ?>"required>
                 </div>
                 </div>
 
@@ -206,23 +228,23 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
                 <div class="col-sm-3">
                   <br>
                   <STRONG>Fecha ingreso Cecyt:</STRONG><br>
-                  <input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : "" ?>">
+                  <input class="form-control" type="date" name="fecha_ingreso" value="<?php echo isset($row['fecha_ingreso']) ? $row['fecha_ingreso'] : "" ?>"required>
                 </div>
                   <div class="col-sm-3">
                     <br>
                  <STRONG>Tipo de invenatario:</STRONG><br>
-                  <input class="form-control" placeholder="Información zac" type="text" name="tipo" value="<?php echo isset($row['tipo']) ? $row['tipo'] : "" ?>">
+                  <input class="form-control" placeholder="Información zac" type="text" name="tipo" value="<?php echo isset($row['tipo']) ? $row['tipo'] : "" ?>"required>
                 </div> 
               
                 <div class="col-sm-3">
                   <br>
                   <STRONG>Fecha de registro Zac:</STRONG><br>
-                   <input class="form-control" type="date" value="<?php echo isset($row['fecha_registro']) ? $row['fecha_registro'] : "" ?>"  name="fecha_registro" >
+                   <input class="form-control" type="date" value="<?php echo isset($row['fecha_registro']) ? $row['fecha_registro'] : "" ?>"  name="fecha_registro" required>
                 </div>  
                 <div class="col-sm-3">
                   <br>
                   <STRONG>ID estatus:</STRONG><br>
-                  <input class="form-control" placeholder="Info zac" type="text" name="estatus" value="<?php echo isset($row['estatus']) ? $row['estatus'] : "" ?>">
+                  <input class="form-control" placeholder="Info zac" type="text" id="id" name="estatus" value="<?php echo isset($row['estatus']) ? $row['estatus'] : "" ?>"required>
               </div>
               </div>
                 <br>
@@ -230,15 +252,15 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
                 <div class="row">
                 <div class="col-sm-3">
                   <STRONG>Marca:</STRONG><br>
-                  <input class="form-control" type="text" name="marca" value="<?php echo isset($row['marca']) ? $row['marca'] : "" ?>">
+                  <input class="form-control" type="text" name="marca" id="Marca" value="<?php echo isset($row['marca']) ? $row['marca'] : "" ?>"required>
                 </div>
                 <div class="col-sm-3">
                   <STRONG>Modelo:</STRONG><br>
-                  <input class="form-control" type="text" name="modelo" value="<?php echo isset($row['modelo']) ? $row['modelo'] : "" ?>">
+                  <input class="form-control" type="text" name="modelo" value="<?php echo isset($row['modelo']) ? $row['modelo'] : "" ?>"required>
                 </div>
                 <div class="col-sm-3">
                   <STRONG>Imagen:</STRONG><br>
-                  <img src="./imagenes/inventario/<?php echo isset($row['imagen']) ? $row['imagen'] : "" ?>" class="img-thumbnail">
+                  <img src="./imagenes/inventario/<?php echo isset($row['imagen']) ? $row['imagen'] : "" ?>" class="img-thumbnail"required>
                 </div>
                 </div>
                   <br>
@@ -266,7 +288,7 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
              
               <div class="col-sm-3">
               <STRONG>Año:</STRONG><br>
-               <input class="form-control" type="text" name="ano" value="<?php echo isset($row['ano']) ? $row['ano'] : "" ?>">
+               <input class="form-control" type="text" name="ano" value="<?php echo isset($row['ano']) ? $row['ano'] : "" ?>"required>
               </div>       
                
 
@@ -280,11 +302,11 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
        <div class="row">
       <div class="col-sm-6">
        <STRONG>Categorias:</STRONG><br>
-        <input class="form-control" type="text" name="categorias" value="<?php echo isset($row['categorias']) ? $row['categorias'] : "" ?>">
+        <input class="form-control" type="text" name="categorias" id="categoria" value="<?php echo isset($row['categorias']) ? $row['categorias'] : "" ?>"required>
       </div>
        <div class="col-md-4">
      <STRONG>Estado Fisico:</STRONG>
-    <select class="form-control" name="estado">
+    <select class="form-control" name="estado"required>
     <option></option>
     <option value="1" <?php if(isset($row['mes']) && $row['mes'] == "1"){ echo "selected"; } ?>>Bueno</option>
     <option value="2" <?php if(isset($row['mes']) && $row['mes'] == "2"){ echo "selected"; } ?>>Regular</option>
@@ -310,17 +332,17 @@ if (isset($_POST['articulo']) AND $_POST['id'] == null AND isset($_FILES['imagen
   <div class="row">
     <div class="col-md-4">
      <STRONG>Area: </STRONG><br>
-       <input type="text" class="form-control uppercase" name="area" value="<?php echo isset($row['area']) ? $row['area'] : "" ?>">
+       <input type="text" class="form-control uppercase" id="area" name="area" value="<?php echo isset($row['area']) ? $row['area'] : "" ?>"required>
      </div>
 
   <div class="col-md-4">
    <STRONG>Ubicación:</STRONG><br>
-    <input type="text" class="form-control uppercase" name="ubicacion" value="<?php echo isset($row['ubicacion']) ? $row['ubicacion'] : "" ?>">
+    <input type="text" class="form-control uppercase" id="ubicacion" name="ubicacion" value="<?php echo isset($row['ubicacion']) ? $row['ubicacion'] : "" ?>"required>
   </div>
 
    <div class="col-md-4">
      <STRONG>Empleado:</STRONG><br>
-    <input type="text"class="form-control uppercase" name="empleado" value="<?php echo isset($row['empleado']) ? $row['empleado'] : "" ?>">
+    <input type="text"class="form-control uppercase" id="empleado" name="empleado" value="<?php echo isset($row['empleado']) ? $row['empleado'] : "" ?>"required>
      </div>
     </div>
     <button href="Historial_Ingresos/index.php" type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>

@@ -62,6 +62,19 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
     <link rel="stylesheet" type="text/css" href="css/style_pie_pagina.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+ <script src="js/validCampoFranz.js"></script>
+       <script type="text/javascript">
+            $(function(){
+                //Para escribir solo letras
+                $('#detalle').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+               
+                //Para escribir solo numeros    
+                $('#valor').validCampoFranz('0123456789');    
+            });
+        </script>        
+
+
   </head>
 
   <body>
@@ -81,28 +94,30 @@ if (isset($_POST['nombre']) AND $_POST['id'] == null) {
           <div class="card border-success">
             <div class="card-body">
               <form action="./GuardarEgreso.php" method="POST">
+                <form novalidate>
                 <input type="hidden" name="id" value="<?php echo isset($row['id']) ? $row['id'] : null ?>">
                 <div class="row">
                   <div class="col-xl-12">
                     <label>Nombre de egreso: </label>
-                    <input type="text" class="form-control uppercase" placeholder="Digite egreso" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : "" ?>">
+                    <input type="text" class="form-control uppercase" placeholder="Digite egreso" name="nombre" value="<?php echo isset($row['nombre']) ? $row['nombre'] : "" ?>"required>
                   </div>
                   <div class="col-xl-12">
                     <label>Detalle egreso: </label>
-                    <input type="text" class="form-control uppercase" placeholder="Digite detalle" name="detalle" value="<?php echo isset($row['detalle']) ? $row['detalle'] : "" ?>">
+                    <input type="text" class="form-control uppercase" placeholder="Digite detalle" name="detalle" value="<?php echo isset($row['detalle']) ? $row['detalle'] : "" ?>"required>
                   </div>
                   <div class="col-sm-6">
                     <label>Valor $: </label>
-                    <input type="text" class="form-control uppercase" name="costo" value="<?php echo isset($row['costo']) ? $row['costo'] : "" ?>">
+                    <input type="text" class="form-control uppercase" name="costo" id="valor" value="<?php echo isset($row['costo']) ? $row['costo'] : "" ?>"required>
                   </div>
                   <div class="col-sm-6">
                     <label>Fecha: </label>
-                    <input class="form-control" type="date"  name="fecha_egreso" value="<?php echo isset($row['fecha_egreso']) ? $row['fecha_egreso'] : "" ?>">
+                    <input class="form-control" type="date"  name="fecha_egreso" value="<?php echo isset($row['fecha_egreso']) ? $row['fecha_egreso'] : "" ?>"required>
                   </div>
                 </div>
                 <br>
                 <button href="egresos.php" type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar Registro</button>
               </form>
+            </form>
             </div>
           </div>
         </div>

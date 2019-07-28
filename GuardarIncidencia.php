@@ -43,6 +43,23 @@ if (isset($_POST['id_empleado'])) {
   <link rel="stylesheet" type="text/css" href="css/style_menu_izquierdo_alumno.css">
   <link rel="stylesheet" type="text/css" href="css/style_pie_pagina.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <script src="js/validCampoFranz.js"></script>
+       <script type="text/javascript">
+            $(function(){
+                //Para escribir solo letras
+                $('#asunto').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#documentos').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+                $('#motivo').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
+               
+
+
+                //Para escribir solo numeros    
+                $('#clausula').validCampoFranz('0123456789');
+          
+            });
+        </script>        
+
 </head>
 
 
@@ -63,6 +80,7 @@ if (isset($_POST['id_empleado'])) {
           <h2 class="card-title">CEDULA DE CONTROL DE INCIDENCIAS</h2>
         </center><br><br>
         <form action="./GuardarIncidencia.php" method="POST">
+          <form novalidate>
         <div class="row">
           <div class="col-md">
             <div class="card border-success">
@@ -74,7 +92,7 @@ if (isset($_POST['id_empleado'])) {
                 <div class="row">
                   <div class="col-xl-8">
                     <STRONG>Nombre del empleado:</STRONG><br><br>
-                    <select id="id_empleado" class="form-control" name="id_empleado">
+                    <select id="id_empleado" class="form-control" name="id_empleado"required>
                       <option>SELECCIONE EMPLEADO</option>
 <?php
 require('conexion.php');
@@ -93,18 +111,18 @@ if($result->num_rows > 0){
 
                   <div class="col-xl-4">
                     <STRONG>Solicitud de fecha:</STRONG><br><br>
-                    <input class="form-control" placeholder="Ingrese fecha" name="fecha_incidencia"><br>
+                    <input class="form-control" placeholder="Ingrese fecha" name="fecha_incidencia"required><br>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-xl-8">
                     <STRONG>Puesto:</STRONG><br><br>
-                    <input type="text" class="form-control uppercase" placeholder="Digite Puesto" id="puesto" disabled><br>
+                    <input type="text" class="form-control uppercase" placeholder="Digite Puesto" id="puesto" required disabled><br>
                   </div>
                   <div class="col-xl-4">
                     <STRONG>No.empleado:</STRONG><br><br>
-                    <input type="text" class="form-control uppercase" placeholder="Digite No.Emp" id="numero_empleado" disabled><br>
+                    <input type="text" class="form-control uppercase" placeholder="Digite No.Emp" id="numero_empleado" required disabled><br>
                   </div>
                 </div>
               </div>
@@ -123,25 +141,25 @@ if($result->num_rows > 0){
                     <div class="row">
                       <div class="col-xl-4">
                         <STRONG>Cláusula CCT:</STRONG><br><br>
-                        <input type="text" class="form-control uppercase" placeholder="Digite Cláusula" name="clausula"><br>
+                        <input type="text" class="form-control uppercase" id="clausula" placeholder="Digite Cláusula" name="clausula"required><br>
                       </div>
 
                       <div class="col-xl-8">
                         <STRONG>Asunto:</STRONG><br><br>
-                        <input type="text" class="form-control uppercase" placeholder="Digite Asunto" name="asunto"><br>
+                        <input type="text" class="form-control uppercase" id="asunto" placeholder="Digite Asunto" name="asunto"required><br>
                       </div>
                     </div>
 
                     <div class="row">
                       <div class="col-xl-4">
                         <STRONG>Documentacion que se anexa:</STRONG><br><br>
-                        <input type="text" class="form-control uppercase" placeholder="Digite documentación" name="documentacion"><br>
+                        <input type="text" class="form-control uppercase" placeholder="Digite documentación" id="documentos" name="documentacion"required><br>
                         <button type="submit" name="agregar" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                       </div>
 
                       <div class="col-xl-8">
                         <STRONG>Lo anterior por los siguientes motivos:</STRONG><br><br>
-                        <textarea class="form-control" placeholder="Digite Motivos" rows="3" name="motivos"></textarea>
+                        <textarea class="form-control" placeholder="Digite Motivos" rows="3" id="motivo" name="motivos"required></textarea>
                       </div>
                     </div>
                   </div>
